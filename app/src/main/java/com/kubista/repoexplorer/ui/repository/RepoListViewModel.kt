@@ -1,5 +1,7 @@
 package com.kubista.repoexplorer.ui.repository
 
+import android.arch.lifecycle.MutableLiveData
+import android.view.View
 import com.kubista.repoexplorer.base.BaseViewModel
 import com.kubista.repoexplorer.network.GitHubApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,6 +17,7 @@ class RepoListViewModel : BaseViewModel() {
     lateinit var gitHubApi: GitHubApi
 
     private lateinit var subscription: Disposable
+    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
 
     init{
         loadPosts()
@@ -33,11 +36,11 @@ class RepoListViewModel : BaseViewModel() {
     }
 
     private fun onRetrievePostListStart(){
-
+        loadingVisibility.value = View.VISIBLE
     }
 
     private fun onRetrievePostListFinish(){
-
+        loadingVisibility.value = View.GONE
     }
 
     private fun onRetrievePostListSuccess(){
