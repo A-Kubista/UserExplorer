@@ -47,4 +47,9 @@ class RepoListViewModel : BaseViewModel() {
     private fun onRetrievePostListError(){
 
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        subscription.dispose()
+    }
 }
