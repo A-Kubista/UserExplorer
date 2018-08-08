@@ -5,12 +5,12 @@ package com.kubista.repoexplorer.base
  */
 
 import android.arch.lifecycle.ViewModel
-import com.kubista.repoexplorer.injection.component.ViewModelInjector
+import com.kubista.repoexplorer.injection.component.ViewModelnjector
 import com.kubista.repoexplorer.injection.module.NetworkModule
 import com.kubista.repoexplorer.ui.repository.RepoListViewModel
 
 abstract class BaseViewModel: ViewModel(){
-    private val injector: ViewModelInjector = DaggerViewModelInjector
+    private val injector: ViewModelnjector = DaggerViewModelInjector
             .builder()
             .networkModule(NetworkModule)
             .build()

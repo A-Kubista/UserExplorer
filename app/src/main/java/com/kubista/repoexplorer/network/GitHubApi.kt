@@ -1,6 +1,6 @@
 package com.kubista.repoexplorer.network
 
-import com.kubista.repoexplorer.model.GithubRepo
+import com.kubista.repoexplorer.model.GitHubRepo
 import retrofit2.http.GET
 import io.reactivex.Observable
 
@@ -16,5 +16,5 @@ interface GitHubApi {
      * Get the list of the pots from the API
      */
     @GET("/repositories")
-    fun getRepositories(): Observable<List<GithubRepo>>
+    fun getRepositories(): Observable<List<GitHubRepo>>
 }
