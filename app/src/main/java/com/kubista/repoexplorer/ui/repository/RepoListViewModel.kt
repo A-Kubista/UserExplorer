@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * Created by alek on 08/08/2018.
  */
-class RepoListActivity : BaseViewModel() {
+class RepoListViewModel : BaseViewModel() {
     @Inject
     lateinit var postApi: GitHubApi
 }
