@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.injection
+package com.kubista.repoexplorer.injection.module
 
 import com.kubista.repoexplorer.network.GitHubApi
 import com.kubista.repoexplorer.utils.GITHUB_BASE_URL
