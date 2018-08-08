@@ -11,4 +11,4 @@ package com.kubista.repoexplorer.model
  * @property name the title of the repository
  * @property description the content of the repository
  */
-data class GithubRepo( val id: Int, val name: String, val description: String)
+data class GitHubRepo(val id: Int, val name: String, val description: String)

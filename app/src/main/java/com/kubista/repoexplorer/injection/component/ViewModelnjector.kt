@@ -14,7 +14,7 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(modules = [(NetworkModule::class)])
-interface ViewModelInjector {
+interface ViewModelnjector {
     /**
      * Injects required dependencies into the specified RepoListViewModel.
      * @param repoListViewModel RepoListViewModel in which to inject the dependencies
@@ -23,7 +23,7 @@ interface ViewModelInjector {
 
     @Component.Builder
     interface Builder {
-        fun build(): ViewModelInjector
+        fun build(): ViewModelnjector
 
         fun networkModule(networkModule: NetworkModule): Builder
     }
