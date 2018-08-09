@@ -9,6 +9,7 @@ import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.BaseViewModel
 import com.kubista.repoexplorer.model.BitBucketRepo
 import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.repoexplorer.model.IRepo
 import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
 
@@ -32,7 +33,7 @@ class RepoListViewModel:BaseViewModel(){
     private lateinit var subscription: Disposable
 
     init{
-        loadGitHubRepos()
+       // loadGitHubRepos()
         loadReposBitBucket()
     }
 
@@ -48,7 +49,7 @@ class RepoListViewModel:BaseViewModel(){
                 .doOnSubscribe { onRetrieveRepoListStart() }
                 .doOnTerminate { onRetrieveRepoListFinish() }
                 .subscribe(
-                        { result -> onRetrieveGitHubRepoListSuccess(result) },
+                        { result -> onRetrieveRepoListSuccess(result) },
                         { onRetrieveRepoListError() }
                 )
     }
@@ -60,7 +61,7 @@ class RepoListViewModel:BaseViewModel(){
                 .doOnSubscribe { onRetrieveRepoListStart() }
                 .doOnTerminate { onRetrieveRepoListFinish() }
                 .subscribe(
-                        { result -> onRetrieveBitBucketRepoListSuccess(result) },
+                        { result -> onRetrieveRepoListSuccess(result.values) },
                         { onRetrieveRepoListError() }
                 )
     }
@@ -74,12 +75,8 @@ class RepoListViewModel:BaseViewModel(){
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveGitHubRepoListSuccess(repoList:List<GitHubRepo>){
+    private fun onRetrieveRepoListSuccess(repoList:List<IRepo>){
         repoListAdapter.updateRepoList(repoList)
-    }
-
-    private fun onRetrieveBitBucketRepoListSuccess(repoList:List<BitBucketRepo>){
-       // repoListAdapter.updateRepoList()
     }
 
     private fun onRetrieveRepoListError(){
