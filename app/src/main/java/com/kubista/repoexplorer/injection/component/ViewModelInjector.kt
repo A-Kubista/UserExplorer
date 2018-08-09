@@ -1,29 +1,25 @@
 package com.kubista.repoexplorer.injection.component
 
-import com.kubista.repoexplorer.injection.module.NetworkModule
-import com.kubista.repoexplorer.ui.repository.RepoListViewModel
 import dagger.Component
+import com.kubista.repoexplorer.injection.module.NetworkModule
+import com.kubista.repoexplorer.ui.repo.RepoListViewModel
 import javax.inject.Singleton
-
-/**
- * Created by alek on 08/08/2018.
- */
 
 /**
  * Component providing inject() methods for presenters.
  */
 @Singleton
 @Component(modules = [(NetworkModule::class)])
-interface ViewModelnjector {
+interface ViewModelInjector {
     /**
      * Injects required dependencies into the specified RepoListViewModel.
-     * @param repoListViewModel RepoListViewModel in which to inject the dependencies
+     * @param postListViewModel RepoListViewModel in which to inject the dependencies
      */
-    fun inject(repoListViewModel: RepoListViewModel)
+    fun inject(postListViewModel: RepoListViewModel)
 
     @Component.Builder
     interface Builder {
-        fun build(): ViewModelnjector
+        fun build(): ViewModelInjector
 
         fun networkModule(networkModule: NetworkModule): Builder
     }

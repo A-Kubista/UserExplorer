@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kubista.repoexplorer.ui.repository.RepoViewModel" />
+            type="com.kubista.repoexplorer.ui.repo.RepoViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -15,23 +15,23 @@
         android:paddingRight="16dp">
 
         <TextView
-            android:id="@+id/repo_name"
+            android:id="@+id/repo_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            app:mutableText="@{viewModel.getRepoName()}"
+            app:mutableText="@{viewModel.getRepoTitle()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/repo_desc"
+            android:id="@+id/repo_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:mutableText="@{viewModel.getRepoDesc()}"
+            app:mutableText="@{viewModel.getRepoBody()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repo_name" />
+            app:layout_constraintTop_toBottomOf="@+id/repo_title" />
     </android.support.constraint.ConstraintLayout>
 </layout>

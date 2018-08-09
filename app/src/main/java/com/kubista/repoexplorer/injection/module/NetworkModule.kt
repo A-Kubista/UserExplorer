@@ -1,18 +1,14 @@
 package com.kubista.repoexplorer.injection.module
 
-import com.kubista.repoexplorer.network.GitHubApi
-import com.kubista.repoexplorer.utils.GITHUB_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
+import com.kubista.repoexplorer.network.RepoApi
+import com.kubista.repoexplorer.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-
-/**
- * Created by alek on 08/08/2018.
- */
 
 /**
  * Module which provides all required dependencies about network
@@ -22,15 +18,15 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @Suppress("unused")
 object NetworkModule {
     /**
-     * Provides the GitHub api service implementation.
+     * Provides the Repo service implementation.
      * @param retrofit the Retrofit object used to instantiate the service
-     * @return the GitHub service implementation.
+     * @return the Repo service implementation.
      */
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideGitHubApi(retrofit: Retrofit): GitHubApi {
-        return retrofit.create(GitHubApi::class.java)
+    internal fun provideRepoApi(retrofit: Retrofit): RepoApi {
+        return retrofit.create(RepoApi::class.java)
     }
 
     /**
@@ -42,7 +38,7 @@ object NetworkModule {
     @JvmStatic
     internal fun provideRetrofitInterface(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(GITHUB_BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
