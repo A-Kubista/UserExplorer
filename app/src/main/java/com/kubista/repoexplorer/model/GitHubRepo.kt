@@ -17,9 +17,25 @@ data class GitHubRepo(
         val name: String,
         val description: String,
         val owner: GitHubUser
-)
+) : IRepo {
+    override fun getOwnerName(): String {
+        return owner.login
+    }
+
+    override fun getOwnerAvatarUrl(): String {
+        return owner.avatar_url
+    }
+
+    override fun getRepositoryTitle(): String {
+        return name
+    }
+
+    override fun getRepositoryDescription(): String {
+        return description
+    }
+}
 
 data class GitHubUser(
-        val login: String? = null,
-        val avatar_url: String? = null
+        val login: String,
+        val avatar_url: String
 )

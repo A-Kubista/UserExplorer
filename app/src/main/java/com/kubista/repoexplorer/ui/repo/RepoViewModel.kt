@@ -3,6 +3,7 @@ package com.kubista.repoexplorer.ui.repo
 import android.arch.lifecycle.MutableLiveData
 import com.kubista.repoexplorer.BaseViewModel
 import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.repoexplorer.model.IRepo
 
 class RepoViewModel:BaseViewModel() {
     private val repoTitle = MutableLiveData<String>()
@@ -10,11 +11,11 @@ class RepoViewModel:BaseViewModel() {
     private val repoOwnerLogin = MutableLiveData<String>()
     private val repoOwnerAvatar = MutableLiveData<String>()
 
-    fun bind(repo: GitHubRepo){
-        repoTitle.value = repo.name
-        repoBody.value = repo.description
-        repoOwnerLogin.value = repo.owner.login
-        repoOwnerAvatar.value = repo.owner.avatar_url
+    fun bind(repo: IRepo){
+        repoTitle.value = repo.getRepositoryTitle()
+        repoBody.value = repo.getRepositoryDescription()
+        repoOwnerLogin.value = repo.getOwnerName()
+        repoOwnerAvatar.value = repo.getOwnerAvatarUrl()
     }
 
     fun getRepoTitle():MutableLiveData<String>{

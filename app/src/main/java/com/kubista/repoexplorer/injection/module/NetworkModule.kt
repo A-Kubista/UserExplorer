@@ -1,5 +1,6 @@
 package com.kubista.repoexplorer.injection.module
 
+import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,18 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 // Safe here as we are dealing with a Dagger 2 module
 @Suppress("unused")
 object NetworkModule {
+    /**
+     * Provides the Repo service implementation.
+     * @param retrofit the Retrofit object used to instantiate the service
+     * @return the Repo service implementation.
+     */
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideBitbucketRepoApi(retrofit: Retrofit): BitBucketRepoApi {
+        return retrofit.create(BitBucketRepoApi::class.java)
+    }
+
     /**
      * Provides the Repo service implementation.
      * @param retrofit the Retrofit object used to instantiate the service

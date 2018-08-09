@@ -7,7 +7,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.BaseViewModel
+import com.kubista.repoexplorer.model.BitBucketRepo
 import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
 
 import javax.inject.Inject
@@ -15,17 +17,23 @@ import javax.inject.Inject
 class RepoListViewModel:BaseViewModel(){
     @Inject
     lateinit var gitHubRepoApi: GitHubRepoApi
+    @Inject
+    lateinit var bitBucketRepoApi: BitBucketRepoApi
     private lateinit var repoList:List<GitHubRepo>
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
-    val errorClickListener = View.OnClickListener { loadRepos() }
+    val errorClickListener = View.OnClickListener {
+        loadGitHubRepos()
+        loadReposBitBucket()
+    }
 
     private lateinit var subscription: Disposable
 
     init{
-        loadRepos()
+        loadGitHubRepos()
+        loadReposBitBucket()
     }
 
     override fun onCleared() {
@@ -33,14 +41,26 @@ class RepoListViewModel:BaseViewModel(){
         subscription.dispose()
     }
 
-    private fun loadRepos(){
+    private fun loadGitHubRepos(){
         subscription = gitHubRepoApi.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveRepoListStart() }
                 .doOnTerminate { onRetrieveRepoListFinish() }
                 .subscribe(
-                        { result -> onRetrieveRepoListSuccess(result) },
+                        { result -> onRetrieveGitHubRepoListSuccess(result) },
+                        { onRetrieveRepoListError() }
+                )
+    }
+
+    private fun loadReposBitBucket(){
+        subscription = bitBucketRepoApi.getRepos()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { onRetrieveRepoListStart() }
+                .doOnTerminate { onRetrieveRepoListFinish() }
+                .subscribe(
+                        { result -> onRetrieveBitBucketRepoListSuccess(result) },
                         { onRetrieveRepoListError() }
                 )
     }
@@ -54,8 +74,12 @@ class RepoListViewModel:BaseViewModel(){
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveRepoListSuccess(postList:List<GitHubRepo>){
-        repoListAdapter.updateRepoList(postList)
+    private fun onRetrieveGitHubRepoListSuccess(repoList:List<GitHubRepo>){
+        repoListAdapter.updateRepoList(repoList)
+    }
+
+    private fun onRetrieveBitBucketRepoListSuccess(repoList:List<BitBucketRepo>){
+       // repoListAdapter.updateRepoList()
     }
 
     private fun onRetrieveRepoListError(){
