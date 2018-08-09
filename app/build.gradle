@@ -1,16 +1,18 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.kubista.repoexplorer"
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -22,8 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
 }
 
@@ -35,11 +39,24 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    // Support Design
+    implementation "com.android.support:design:$android_support_version"
+
+    // RecyclerView
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
+
+    // Constraint Layout
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
+
     // LiveData & ViewModel
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation"android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
     // Data binding
-    kapt "com.android.databinding:compiler:3.1.4"
+    kapt "com.android.databinding:compiler:3.1.3"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -54,13 +71,4 @@ dependencies {
     //Rx
     implementation "io.reactivex.rxjava2:rxjava:2.1.15"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-
-    // RecyclerView
-    implementation "com.android.support:recyclerview-v7:$android_support_version"
-
-    // Constraint Layout
-    implementation "com.android.support.constraint:constraint-layout:1.1.2"
-
-    // Support Design
-    implementation "com.android.support:design:$android_support_version"
 }
