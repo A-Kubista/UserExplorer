@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.base.BaseViewModel
+import com.kubista.repoexplorer.model.GitHubRepo
 import com.kubista.repoexplorer.network.GitHubApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,6 +22,7 @@ class RepoListViewModel : BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadPosts() }
+    val repoListAdapter: RepositoryListAdapter = RepositoryListAdapter()
 
     init{
         loadPosts()
@@ -33,7 +35,7 @@ class RepoListViewModel : BaseViewModel() {
                 .doOnSubscribe { onRetrievePostListStart() }
                 .doOnTerminate { onRetrievePostListFinish() }
                 .subscribe(
-                        { onRetrievePostListSuccess() },
+                        { result -> onRetrievePostListSuccess(result)  },
                         { onRetrievePostListError() }
                 )
     }
@@ -47,8 +49,8 @@ class RepoListViewModel : BaseViewModel() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrievePostListSuccess(){
-
+    private fun onRetrievePostListSuccess(repoList:List<GitHubRepo>){
+        repoListAdapter.updatePostList(repoList)
     }
 
     private fun onRetrievePostListError(){
