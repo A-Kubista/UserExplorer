@@ -1,5 +1,7 @@
 package com.kubista.repoexplorer.model
 
+import android.view.Display
+
 
 data class Values(
         val values: List<BitBucketRepo>
@@ -14,14 +16,15 @@ data class Values(
 
 data class BitBucketRepo(
         val name: String,
-        val description: String
+        val description: String,
+        val owner: Owner
 ) : IRepo {
     override fun getOwnerName(): String {
-        return name
+        return owner.display_name
     }
 
     override fun getOwnerAvatarUrl(): String {
-        return name
+        return owner.links.avatar.href
     }
 
     override fun getRepositoryTitle(): String {
@@ -32,3 +35,17 @@ data class BitBucketRepo(
         return description
     }
 }
+
+
+data class Owner(
+        val links: Links,
+        val display_name: String
+)
+
+data class Links(
+        val avatar: Avatar
+)
+
+data class Avatar(
+        val href: String
+)
