@@ -20,7 +20,8 @@ class RepoListViewModel:BaseViewModel(){
     lateinit var gitHubRepoApi: GitHubRepoApi
     @Inject
     lateinit var bitBucketRepoApi: BitBucketRepoApi
-    private lateinit var repoList:List<GitHubRepo>
+    private lateinit var cachedBitbucketRepos:List<IRepo>
+    private lateinit var cachedGitHubRepos:List<IRepo>
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -33,7 +34,7 @@ class RepoListViewModel:BaseViewModel(){
     private lateinit var subscription: Disposable
 
     init{
-       // loadGitHubRepos()
+        loadGitHubRepos()
         loadReposBitBucket()
     }
 
@@ -49,7 +50,7 @@ class RepoListViewModel:BaseViewModel(){
                 .doOnSubscribe { onRetrieveRepoListStart() }
                 .doOnTerminate { onRetrieveRepoListFinish() }
                 .subscribe(
-                        { result -> onRetrieveRepoListSuccess(result) },
+                        { result -> onRetrieveGitHubRepoListSuccess(result) },
                         { onRetrieveRepoListError() }
                 )
     }
@@ -61,7 +62,7 @@ class RepoListViewModel:BaseViewModel(){
                 .doOnSubscribe { onRetrieveRepoListStart() }
                 .doOnTerminate { onRetrieveRepoListFinish() }
                 .subscribe(
-                        { result -> onRetrieveRepoListSuccess(result.values) },
+                        { result -> onRetrieveBitBucketRepoListSuccess(result.values) },
                         { onRetrieveRepoListError() }
                 )
     }
@@ -75,8 +76,16 @@ class RepoListViewModel:BaseViewModel(){
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveRepoListSuccess(repoList:List<IRepo>){
-        repoListAdapter.updateRepoList(repoList)
+    private fun onRetrieveGitHubRepoListSuccess(repoList:List<IRepo>){
+        cachedGitHubRepos = repoList
+        val resultList = if(::cachedBitbucketRepos.isInitialized)  repoList + cachedBitbucketRepos else repoList
+        repoListAdapter.updateRepoList(resultList)
+    }
+
+    private fun onRetrieveBitBucketRepoListSuccess(repoList:List<IRepo>){
+        cachedBitbucketRepos = repoList
+        val resultList = if(::cachedGitHubRepos.isInitialized)  repoList + cachedGitHubRepos else repoList
+        repoListAdapter.updateRepoList(resultList)
     }
 
     private fun onRetrieveRepoListError(){
