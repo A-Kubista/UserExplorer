@@ -8,8 +8,8 @@ import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.databinding.ItemRepoBinding
 import com.kubista.repoexplorer.model.IRepo
 
-class RepoListAdapter: RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
-    private lateinit var repoList:List<IRepo>
+class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
+    private lateinit var repoList: List<IRepo>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListAdapter.ViewHolder {
         val binding: ItemRepoBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_repo, parent, false)
@@ -21,18 +21,18 @@ class RepoListAdapter: RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return if(::repoList.isInitialized) repoList.size else 0
+        return if (::repoList.isInitialized) repoList.size else 0
     }
 
-    fun updateRepoList(repoList:List<IRepo>){
+    fun updateRepoList(repoList: List<IRepo>) {
         this.repoList = repoList
         notifyDataSetChanged()
     }
 
-    class ViewHolder(private val binding: ItemRepoBinding):RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
         private val viewModel = RepoViewModel()
 
-        fun bind(repo: IRepo){
+        fun bind(repo: IRepo) {
             viewModel.bind(repo)
             binding.viewModel = viewModel
         }

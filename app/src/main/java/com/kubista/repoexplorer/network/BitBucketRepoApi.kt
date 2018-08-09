@@ -1,7 +1,5 @@
 package com.kubista.repoexplorer.network
 
-import com.kubista.repoexplorer.model.BitBucketRepo
-import com.kubista.repoexplorer.model.GitHubRepo
 import com.kubista.repoexplorer.model.Values
 import io.reactivex.Observable
 import retrofit2.http.GET

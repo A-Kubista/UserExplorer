@@ -1,8 +1,8 @@
 package com.kubista.repoexplorer.injection.component
 
-import dagger.Component
 import com.kubista.repoexplorer.injection.module.NetworkModule
 import com.kubista.repoexplorer.ui.repo.RepoListViewModel
+import dagger.Component
 import javax.inject.Singleton
 
 /**

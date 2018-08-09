@@ -1,12 +1,10 @@
 package com.kubista.repoexplorer.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-
 
 data class Values(
         val values: List<BitBucketRepo>
-        )
+)
+
 /**
  * Class which provides a model for post
  * @constructor Sets all properties of the post

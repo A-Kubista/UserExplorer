@@ -3,11 +3,11 @@ package com.kubista.repoexplorer.injection.module
 import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
 import com.kubista.repoexplorer.utils.BASE_URL_BITBUCKET
+import com.kubista.repoexplorer.utils.BASE_URL_GITHUB
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
-import com.kubista.repoexplorer.utils.BASE_URL_GITHUB
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -28,7 +28,7 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideBitbucketRepoApi(@Named("BitBucket")retrofit: Retrofit): BitBucketRepoApi {
+    internal fun provideBitbucketRepoApi(@Named("BitBucket") retrofit: Retrofit): BitBucketRepoApi {
         return retrofit.create(BitBucketRepoApi::class.java)
     }
 
@@ -40,7 +40,7 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideGitHubRepoApi(@Named("GitHub")retrofit: Retrofit): GitHubRepoApi {
+    internal fun provideGitHubRepoApi(@Named("GitHub") retrofit: Retrofit): GitHubRepoApi {
         return retrofit.create(GitHubRepoApi::class.java)
     }
 

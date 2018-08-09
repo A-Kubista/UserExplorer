@@ -6,7 +6,7 @@ import com.kubista.repoexplorer.injection.component.ViewModelInjector
 import com.kubista.repoexplorer.injection.module.NetworkModule
 import com.kubista.repoexplorer.ui.repo.RepoListViewModel
 
-abstract class BaseViewModel:ViewModel(){
+abstract class BaseViewModel : ViewModel() {
     private val injector: ViewModelInjector = DaggerViewModelInjector
             .builder()
             .networkModule(NetworkModule)
