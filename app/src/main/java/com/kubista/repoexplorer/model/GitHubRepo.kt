@@ -17,6 +17,10 @@ data class GitHubRepo(
         val description: String,
         val owner: GitHubUser
 ) : IRepo {
+    override fun isBitbucektRepo(): Boolean {
+        return false
+    }
+
     override fun getOwnerName(): String {
         return owner.login
     }

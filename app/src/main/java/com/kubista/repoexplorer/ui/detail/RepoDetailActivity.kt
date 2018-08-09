@@ -12,10 +12,7 @@ import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.databinding.ActivityRepoDetailBinding
 import com.kubista.repoexplorer.model.IRepo
 import com.kubista.repoexplorer.ui.repo.RepoViewModel
-import com.kubista.repoexplorer.utils.KEY_OWNER_AVATAR_URL
-import com.kubista.repoexplorer.utils.KEY_OWNER_NAME
-import com.kubista.repoexplorer.utils.KEY_REPO_DESC
-import com.kubista.repoexplorer.utils.KEY_REPO_TITLE
+import com.kubista.repoexplorer.utils.*
 
 class RepoDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRepoDetailBinding
@@ -29,6 +26,10 @@ class RepoDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(RepoDetailViewModel::class.java)
 
         val repo = object: IRepo {
+            override fun isBitbucektRepo(): Boolean {
+                return intent.getBooleanExtra(KEY_REPO_TYPE, false)
+            }
+
             override fun getOwnerName(): String {
                return intent.getStringExtra(KEY_OWNER_NAME)
             }

@@ -5,4 +5,5 @@ interface IRepo {
     fun getOwnerAvatarUrl(): String
     fun getRepositoryTitle(): String
     fun getRepositoryDescription(): String
+    fun isBitbucektRepo(): Boolean
 }

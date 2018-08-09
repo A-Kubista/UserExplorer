@@ -19,6 +19,10 @@ data class BitBucketRepo(
         val description: String,
         val owner: Owner
 ) : IRepo {
+    override fun isBitbucektRepo(): Boolean {
+        return true
+    }
+
     override fun getOwnerName(): String {
         return owner.display_name
     }
