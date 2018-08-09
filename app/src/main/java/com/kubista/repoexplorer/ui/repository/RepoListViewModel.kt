@@ -2,6 +2,7 @@ package com.kubista.repoexplorer.ui.repository
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.base.BaseViewModel
 import com.kubista.repoexplorer.network.GitHubApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +19,8 @@ class RepoListViewModel : BaseViewModel() {
 
     private lateinit var subscription: Disposable
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorClickListener = View.OnClickListener { loadPosts() }
 
     init{
         loadPosts()
@@ -37,6 +40,7 @@ class RepoListViewModel : BaseViewModel() {
 
     private fun onRetrievePostListStart(){
         loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
     }
 
     private fun onRetrievePostListFinish(){
@@ -48,7 +52,7 @@ class RepoListViewModel : BaseViewModel() {
     }
 
     private fun onRetrievePostListError(){
-
+        errorMessage.value = R.string.fetch_error
     }
 
     override fun onCleared() {
