@@ -40,7 +40,7 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRepoApi(@Named("GitHub")retrofit: Retrofit): GitHubRepoApi {
+    internal fun provideGitHubRepoApi(@Named("GitHub")retrofit: Retrofit): GitHubRepoApi {
         return retrofit.create(GitHubRepoApi::class.java)
     }
 
