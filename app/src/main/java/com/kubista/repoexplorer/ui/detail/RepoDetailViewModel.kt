@@ -29,6 +29,6 @@ class RepoDetailViewModel : BaseViewModel() {
     }
 
     fun getRepoOwnerAvatar(): String {
-        return if( !repoOwnerAvatar.isNullOrBlank() ) repoOwnerAvatar!!  else " "
+        return repoOwnerAvatar
     }
 }
