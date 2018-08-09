@@ -2,6 +2,7 @@ package com.kubista.repoexplorer.ui.repo
 
 import android.arch.lifecycle.MutableLiveData
 import com.kubista.repoexplorer.BaseViewModel
+import com.kubista.repoexplorer.model.GitHubRepo
 import com.kubista.repoexplorer.model.IRepo
 
 class RepoViewModel : BaseViewModel() {
@@ -29,7 +30,7 @@ class RepoViewModel : BaseViewModel() {
         return repoOwnerLogin
     }
 
-    fun getRepoOwnerAvatar(): MutableLiveData<String> {
-        return repoOwnerAvatar
+    fun getRepoOwnerAvatar(): String {
+        return if( !repoOwnerAvatar.value.isNullOrBlank() ) repoOwnerAvatar.value!!  else ""
     }
 }

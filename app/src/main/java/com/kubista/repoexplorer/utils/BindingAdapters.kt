@@ -6,8 +6,12 @@ import android.databinding.BindingAdapter
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.utils.extension.getParentActivity
+import com.squareup.picasso.Picasso
+
 
 @BindingAdapter("adapter")
 fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
@@ -28,4 +32,12 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
     if (parentActivity != null && text != null) {
         text.observe(parentActivity, Observer { value -> view.text = value ?: "" })
     }
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, imageUrl: String) {
+    Picasso.get()
+            .load(imageUrl)
+            .placeholder(R.drawable.placeholder)
+            .into(view)
 }
