@@ -2,6 +2,7 @@ package com.kubista.repoexplorer.ui.repo
 
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
+import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -90,5 +91,9 @@ class RepoListViewModel:BaseViewModel(){
 
     private fun onRetrieveRepoListError(){
         errorMessage.value = R.string.fetch_error
+    }
+
+    fun toggleSort(sortEnabled: Boolean){
+        repoListAdapter.toggleSort(sortEnabled)
     }
 }

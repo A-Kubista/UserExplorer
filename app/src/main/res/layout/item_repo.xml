@@ -16,7 +16,7 @@
         android:paddingRight="16dp">
 
         <TextView
-            android:id="@+id/repo_title"
+            android:id="@+id/repo_owner_login"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
@@ -29,18 +29,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/repo_owner_avatar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repo_owner_login"
-            app:mutableText="@{viewModel.getRepoTitle()}" />
+            app:layout_constraintTop_toBottomOf="@+id/repo_title"
+            app:mutableText="@{viewModel.getRepoOwnerLogin()}" />
 
         <TextView
-            android:id="@+id/repo_owner_login"
+            android:id="@+id/repo_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/repo_owner_avatar"
-            app:mutableText="@{viewModel.getRepoOwnerLogin()}" />
+            app:mutableText="@{viewModel.getRepoTitle()}" />
 
         <ImageView
             android:id="@+id/repo_owner_avatar"
