@@ -10,10 +10,16 @@ import android.arch.persistence.room.PrimaryKey
  * @property name the title of the post
  * @property description the content of the post
  */
-@Entity
-data class Repo(
+
+data class GitHubRepo(
         @field:PrimaryKey
         val id: Int,
         val name: String,
-        val description: String
+        val description: String,
+        val owner: GitHubUser
+)
+
+data class GitHubUser(
+        val login: String? = null,
+        val avatar_url: String? = null
 )

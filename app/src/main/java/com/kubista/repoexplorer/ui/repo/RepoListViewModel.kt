@@ -7,14 +7,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.BaseViewModel
-import com.kubista.repoexplorer.model.Repo
-import com.kubista.repoexplorer.network.RepoApi
+import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.repoexplorer.network.GitHubRepoApi
+
 import javax.inject.Inject
 
 class RepoListViewModel:BaseViewModel(){
     @Inject
-    lateinit var repoApi: RepoApi
-    private lateinit var repoList:List<Repo>
+    lateinit var gitHubRepoApi: GitHubRepoApi
+    private lateinit var repoList:List<GitHubRepo>
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -33,7 +34,7 @@ class RepoListViewModel:BaseViewModel(){
     }
 
     private fun loadRepos(){
-        subscription = repoApi.getRepos()
+        subscription = gitHubRepoApi.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveRepoListStart() }
@@ -53,7 +54,7 @@ class RepoListViewModel:BaseViewModel(){
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveRepoListSuccess(postList:List<Repo>){
+    private fun onRetrieveRepoListSuccess(postList:List<GitHubRepo>){
         repoListAdapter.updateRepoList(postList)
     }
 

@@ -1,10 +1,10 @@
 package com.kubista.repoexplorer.injection.module
 
+import com.kubista.repoexplorer.network.GitHubRepoApi
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import io.reactivex.schedulers.Schedulers
-import com.kubista.repoexplorer.network.RepoApi
 import com.kubista.repoexplorer.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -25,8 +25,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRepoApi(retrofit: Retrofit): RepoApi {
-        return retrofit.create(RepoApi::class.java)
+    internal fun provideRepoApi(retrofit: Retrofit): GitHubRepoApi {
+        return retrofit.create(GitHubRepoApi::class.java)
     }
 
     /**
