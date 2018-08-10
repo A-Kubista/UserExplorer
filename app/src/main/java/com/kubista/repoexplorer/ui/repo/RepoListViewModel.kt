@@ -15,17 +15,22 @@ import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
 
 import javax.inject.Inject
+import android.databinding.ObservableBoolean
+
+
 
 class RepoListViewModel:BaseViewModel(){
     @Inject
     lateinit var gitHubRepoApi: GitHubRepoApi
     @Inject
     lateinit var bitBucketRepoApi: BitBucketRepoApi
+
     private lateinit var cachedBitbucketRepos:List<IRepo>
     private lateinit var cachedGitHubRepos:List<IRepo>
-    val repoListAdapter: RepoListAdapter = RepoListAdapter()
 
+    val repoListAdapter: RepoListAdapter = RepoListAdapter()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+    var isLoading = ObservableBoolean()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
         loadGitHubRepos()
@@ -35,13 +40,17 @@ class RepoListViewModel:BaseViewModel(){
     private lateinit var subscription: Disposable
 
     init{
-        loadGitHubRepos()
-        loadReposBitBucket()
+        loadRepos()
     }
 
     override fun onCleared() {
         super.onCleared()
         subscription.dispose()
+    }
+
+    fun loadRepos(){
+        loadGitHubRepos()
+        loadReposBitBucket()
     }
 
     private fun loadGitHubRepos(){
@@ -69,12 +78,14 @@ class RepoListViewModel:BaseViewModel(){
     }
 
     private fun onRetrieveRepoListStart(){
+        isLoading.set(true)
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
 
     private fun onRetrieveRepoListFinish(){
         loadingVisibility.value = View.GONE
+        isLoading.set(false)
     }
 
     private fun onRetrieveGitHubRepoListSuccess(repoList:List<IRepo>){
