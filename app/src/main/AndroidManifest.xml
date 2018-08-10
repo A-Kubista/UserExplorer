@@ -17,6 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.detail.RepoDetailActivity"/>
+        <activity
+            android:name=".ui.detail.RepoDetailActivity"
+            android:theme="@style/AppTheme.NoTitle"/>
     </application>
 </manifest>
