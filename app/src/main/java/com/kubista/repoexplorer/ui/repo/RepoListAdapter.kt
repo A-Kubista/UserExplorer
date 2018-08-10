@@ -11,10 +11,7 @@ import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.databinding.ItemRepoBinding
 import com.kubista.repoexplorer.model.IRepo
 import com.kubista.repoexplorer.ui.detail.RepoDetailActivity
-import com.kubista.repoexplorer.utils.KEY_OWNER_AVATAR_URL
-import com.kubista.repoexplorer.utils.KEY_OWNER_NAME
-import com.kubista.repoexplorer.utils.KEY_REPO_DESC
-import com.kubista.repoexplorer.utils.KEY_REPO_TITLE
+import com.kubista.repoexplorer.utils.*
 import java.util.*
 
 
@@ -38,6 +35,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
             intent.putExtra(KEY_OWNER_AVATAR_URL, repoList[position].getOwnerAvatarUrl())
             intent.putExtra(KEY_REPO_TITLE, repoList[position].getRepositoryTitle())
             intent.putExtra(KEY_REPO_DESC, repoList[position].getRepositoryDescription())
+            intent.putExtra(KEY_REPO_TYPE, repoList[position].isBitbucektRepo())
             startActivity(contex, intent, null)
         }
     }
