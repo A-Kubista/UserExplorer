@@ -1,7 +1,5 @@
 package com.kubista.repoexplorer.model
 
-import android.view.Display
-
 
 data class Values(
         val values: List<BitBucketRepo>

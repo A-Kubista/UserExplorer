@@ -1,37 +1,32 @@
 package com.kubista.repoexplorer.ui.repo
 
 import android.arch.lifecycle.MutableLiveData
+import android.databinding.ObservableBoolean
 import android.view.View
-import android.widget.Toast
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.BaseViewModel
-import com.kubista.repoexplorer.model.BitBucketRepo
-import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.model.IRepo
 import com.kubista.repoexplorer.network.BitBucketRepoApi
 import com.kubista.repoexplorer.network.GitHubRepoApi
-
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
-import android.databinding.ObservableBoolean
-import io.reactivex.Observable
 
 
-class RepoListViewModel:BaseViewModel(){
+class RepoListViewModel : BaseViewModel() {
     @Inject
     lateinit var gitHubRepoApi: GitHubRepoApi
     @Inject
     lateinit var bitBucketRepoApi: BitBucketRepoApi
 
-    private lateinit var cachedBitbucketRepos:List<IRepo>
+    private lateinit var cachedBitbucketRepos: List<IRepo>
 
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     var isLoading = ObservableBoolean()
     var sortEnabled = ObservableBoolean()
-    val errorMessage:MutableLiveData<Int> = MutableLiveData()
+    val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
         loadGitHubRepos()
         loadReposBitBucket()
@@ -40,7 +35,7 @@ class RepoListViewModel:BaseViewModel(){
     private lateinit var subscriptionGitHubApi: Disposable
     private lateinit var subscriptionBitBucketApi: Disposable
 
-    init{
+    init {
         loadRepos()
     }
 
@@ -50,11 +45,11 @@ class RepoListViewModel:BaseViewModel(){
         subscriptionBitBucketApi.dispose()
     }
 
-    fun loadRepos(){
+    fun loadRepos() {
         loadReposBitBucket()
     }
 
-    private fun loadGitHubRepos(){
+    private fun loadGitHubRepos() {
         subscriptionGitHubApi = gitHubRepoApi.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,7 +61,7 @@ class RepoListViewModel:BaseViewModel(){
                 )
     }
 
-    private fun loadReposBitBucket(){
+    private fun loadReposBitBucket() {
         subscriptionBitBucketApi = bitBucketRepoApi.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,33 +73,33 @@ class RepoListViewModel:BaseViewModel(){
                 )
     }
 
-    private fun onRetrieveRepoListStart(){
+    private fun onRetrieveRepoListStart() {
         isLoading.set(true)
         loadingVisibility.value = View.VISIBLE
         errorMessage.value = null
     }
 
-    private fun onRetrieveRepoListFinish(){
+    private fun onRetrieveRepoListFinish() {
         loadingVisibility.value = View.GONE
         isLoading.set(false)
     }
 
-    private fun onRetrieveGitHubRepoListSuccess(repoList:List<IRepo>){
-        val resultList = if(::cachedBitbucketRepos.isInitialized)  repoList + cachedBitbucketRepos else repoList
+    private fun onRetrieveGitHubRepoListSuccess(repoList: List<IRepo>) {
+        val resultList = if (::cachedBitbucketRepos.isInitialized) repoList + cachedBitbucketRepos else repoList
         repoListAdapter.updateRepoList(resultList)
     }
 
-    private fun onRetrieveBitBucketRepoListSuccess(repoList:List<IRepo>){
+    private fun onRetrieveBitBucketRepoListSuccess(repoList: List<IRepo>) {
         cachedBitbucketRepos = repoList
         loadGitHubRepos()
     }
 
-    private fun onRetrieveRepoListError(){
+    private fun onRetrieveRepoListError() {
         errorMessage.value = R.string.fetch_error
     }
 
-    fun toggleSort( value : Boolean){
-        sortEnabled.set(  !sortEnabled.get() )
+    fun toggleSort(value: Boolean) {
+        sortEnabled.set(!sortEnabled.get())
         repoListAdapter.toggleSort(sortEnabled.get())
     }
 }

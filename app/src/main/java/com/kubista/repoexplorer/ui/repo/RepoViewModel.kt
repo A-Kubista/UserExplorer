@@ -33,10 +33,10 @@ class RepoViewModel : BaseViewModel() {
     }
 
     fun getRepoOwnerAvatar(): String {
-        return if( !repoOwnerAvatar.value.isNullOrBlank() ) repoOwnerAvatar.value!!  else ""
+        return if (!repoOwnerAvatar.value.isNullOrBlank()) repoOwnerAvatar.value!! else ""
     }
 
     fun getBitBucketLogoVisibility(): Int {
-        return if( isBitbucektRepo.value!! ) View.VISIBLE else View.INVISIBLE
+        return if (isBitbucektRepo.value!!) View.VISIBLE else View.INVISIBLE
     }
 }

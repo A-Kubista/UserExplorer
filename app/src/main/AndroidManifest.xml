@@ -19,6 +19,6 @@
         </activity>
         <activity
             android:name=".ui.detail.RepoDetailActivity"
-            android:theme="@style/AppTheme.NoTitle"/>
+            android:theme="@style/AppTheme.NoTitle" />
     </application>
 </manifest>

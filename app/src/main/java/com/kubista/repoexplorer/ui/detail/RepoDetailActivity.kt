@@ -1,17 +1,12 @@
 package com.kubista.repoexplorer.ui.detail
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import com.kubista.repoexplorer.R
 import com.kubista.repoexplorer.databinding.ActivityRepoDetailBinding
 import com.kubista.repoexplorer.model.IRepo
-import com.kubista.repoexplorer.ui.repo.RepoViewModel
 import com.kubista.repoexplorer.utils.*
 
 class RepoDetailActivity : AppCompatActivity() {
@@ -25,13 +20,13 @@ class RepoDetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(RepoDetailViewModel::class.java)
 
-        val repo = object: IRepo {
+        val repo = object : IRepo {
             override fun isBitbucektRepo(): Boolean {
                 return intent.getBooleanExtra(KEY_REPO_TYPE, false)
             }
 
             override fun getOwnerName(): String {
-               return intent.getStringExtra(KEY_OWNER_NAME)
+                return intent.getStringExtra(KEY_OWNER_NAME)
             }
 
             override fun getOwnerAvatarUrl(): String {

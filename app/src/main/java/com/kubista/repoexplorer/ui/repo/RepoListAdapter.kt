@@ -69,14 +69,14 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 
         if (sortEnabled) {
             sortRepoList()
-        }else{
+        } else {
             repoList = repoListRaw.toList()
         }
 
         notifyDataSetChanged()
     }
 
-    private fun sortRepoList(){
+    private fun sortRepoList() {
         Collections.sort(repoList) { lhs, rhs ->
             when {
                 lhs.getRepositoryTitle().capitalize() > rhs.getRepositoryTitle().capitalize() -> 1

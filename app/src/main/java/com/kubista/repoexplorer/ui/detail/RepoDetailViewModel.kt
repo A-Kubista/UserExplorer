@@ -1,16 +1,15 @@
 package com.kubista.repoexplorer.ui.detail
 
-import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.kubista.repoexplorer.BaseViewModel
 import com.kubista.repoexplorer.model.IRepo
 
 class RepoDetailViewModel : BaseViewModel() {
-    private lateinit var repoTitle : String
-    private lateinit var repoDesc : String
-    private lateinit var repoOwnerLogin : String
-    private lateinit var repoOwnerAvatar : String
-    private var isBitbucektRepo : Boolean = false
+    private lateinit var repoTitle: String
+    private lateinit var repoDesc: String
+    private lateinit var repoOwnerLogin: String
+    private lateinit var repoOwnerAvatar: String
+    private var isBitbucektRepo: Boolean = false
 
     fun bind(repo: IRepo) {
         repoTitle = repo.getRepositoryTitle()
@@ -37,6 +36,6 @@ class RepoDetailViewModel : BaseViewModel() {
     }
 
     fun getBitBucketLogoVisibility(): Int {
-        return if( isBitbucektRepo ) View.VISIBLE else View.INVISIBLE
+        return if (isBitbucektRepo) View.VISIBLE else View.INVISIBLE
     }
 }
