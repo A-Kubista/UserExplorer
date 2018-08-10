@@ -22,6 +22,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     private lateinit var repoList: List<IRepo>
     private lateinit var repoListRaw: List<IRepo>
     private lateinit var contex: Context
+    private var sortEnabled: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListAdapter.ViewHolder {
         contex = parent.context
@@ -48,6 +49,11 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     fun updateRepoList(repoList: List<IRepo>) {
         this.repoList = repoList
         this.repoListRaw = repoList.toList()
+
+        if (sortEnabled) {
+            sortRepoList()
+        }
+
         notifyDataSetChanged()
     }
 
@@ -61,19 +67,25 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     }
 
     fun toggleSort(sortEnabled: Boolean) {
+        this.sortEnabled = sortEnabled
+
         if (sortEnabled) {
-            Collections.sort(repoList) { lhs, rhs ->
-                when {
-                    lhs.getRepositoryTitle().capitalize() > rhs.getRepositoryTitle().capitalize() -> 1
-                    lhs.getRepositoryTitle().capitalize() < rhs.getRepositoryTitle().capitalize() -> -1
-                    else -> 0
-                }
-            }
+            sortRepoList()
         }else{
             repoList = repoListRaw.toList()
         }
 
         notifyDataSetChanged()
+    }
+
+    private fun sortRepoList(){
+        Collections.sort(repoList) { lhs, rhs ->
+            when {
+                lhs.getRepositoryTitle().capitalize() > rhs.getRepositoryTitle().capitalize() -> 1
+                lhs.getRepositoryTitle().capitalize() < rhs.getRepositoryTitle().capitalize() -> -1
+                else -> 0
+            }
+        }
     }
 
 }

@@ -31,6 +31,7 @@ class RepoListViewModel:BaseViewModel(){
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     var isLoading = ObservableBoolean()
+    var sortEnabled = ObservableBoolean()
     val errorMessage:MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
         loadGitHubRepos()
@@ -104,7 +105,8 @@ class RepoListViewModel:BaseViewModel(){
         errorMessage.value = R.string.fetch_error
     }
 
-    fun toggleSort(sortEnabled: Boolean){
-        repoListAdapter.toggleSort(sortEnabled)
+    fun toggleSort( value : Boolean){
+        sortEnabled.set(  !sortEnabled.get() )
+        repoListAdapter.toggleSort(sortEnabled.get())
     }
 }
