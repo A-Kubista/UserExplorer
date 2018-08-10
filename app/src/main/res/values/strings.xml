@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RepoExplorer</string>
+    <string name="app_name">RepoExplorer - A.Kubista</string>
     <string name="retry">Retry</string>
     <string name="fetch_error">An error occurred while loading the data</string>
     <string name="toggle_sort_info">Sort alphabetically</string>
