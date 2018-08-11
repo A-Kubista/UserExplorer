@@ -34,7 +34,7 @@ data class BitBucketRepo(
     }
 
     override fun getRepositoryDescription(): String {
-        return description
+        return if(!description.isNullOrEmpty()) description else ""
     }
 }
 
