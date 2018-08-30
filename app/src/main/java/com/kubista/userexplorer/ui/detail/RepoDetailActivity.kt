@@ -1,13 +1,13 @@
-package com.kubista.repoexplorer.ui.detail
+package com.kubista.userexplorer.ui.detail
 
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.kubista.repoexplorer.R
-import com.kubista.repoexplorer.databinding.ActivityRepoDetailBinding
-import com.kubista.repoexplorer.model.IRepo
-import com.kubista.repoexplorer.utils.*
+import com.kubista.userexplorer.R
+import com.kubista.userexplorer.databinding.ActivityRepoDetailBinding
+import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.utils.*
 
 class RepoDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRepoDetailBinding

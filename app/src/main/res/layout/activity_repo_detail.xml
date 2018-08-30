@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.kubista.repoexplorer.ui.detail.RepoDetailViewModel" />
+            type="com.kubista.userexplorer.ui.detail.RepoDetailViewModel" />
     </data>
 
     <ScrollView

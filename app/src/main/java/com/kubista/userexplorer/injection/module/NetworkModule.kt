@@ -1,9 +1,9 @@
-package com.kubista.repoexplorer.injection.module
+package com.kubista.userexplorer.injection.module
 
-import com.kubista.repoexplorer.network.BitBucketRepoApi
-import com.kubista.repoexplorer.network.GitHubRepoApi
-import com.kubista.repoexplorer.utils.BASE_URL_BITBUCKET
-import com.kubista.repoexplorer.utils.BASE_URL_GITHUB
+import com.kubista.userexplorer.network.BitBucketRepoApi
+import com.kubista.userexplorer.network.GitHubRepoApi
+import com.kubista.userexplorer.utils.BASE_URL_BITBUCKET
+import com.kubista.userexplorer.utils.BASE_URL_GITHUB
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable

@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.utils
+package com.kubista.userexplorer.utils
 
 /** The base URL of the API */
 const val BASE_URL_GITHUB: String = "https://api.github.com"

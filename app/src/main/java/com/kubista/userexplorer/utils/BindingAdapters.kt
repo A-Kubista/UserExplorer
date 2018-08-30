@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.utils
+package com.kubista.userexplorer.utils
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.kubista.repoexplorer.R
-import com.kubista.repoexplorer.utils.extension.getParentActivity
+import com.kubista.userexplorer.R
+import com.kubista.userexplorer.utils.extension.getParentActivity
 import com.squareup.picasso.Picasso
 
 

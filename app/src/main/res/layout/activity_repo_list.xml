@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.kubista.repoexplorer.ui.repo.RepoListViewModel" />
+            type="com.kubista.userexplorer.ui.repo.RepoListViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

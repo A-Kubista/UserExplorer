@@ -1,8 +1,8 @@
-package com.kubista.repoexplorer.ui.detail
+package com.kubista.userexplorer.ui.detail
 
 import android.view.View
-import com.kubista.repoexplorer.BaseViewModel
-import com.kubista.repoexplorer.model.IRepo
+import com.kubista.userexplorer.BaseViewModel
+import com.kubista.userexplorer.model.IRepo
 
 class RepoDetailViewModel : BaseViewModel() {
     private lateinit var repoTitle: String

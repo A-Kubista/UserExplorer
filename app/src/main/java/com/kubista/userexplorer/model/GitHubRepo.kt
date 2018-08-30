@@ -1,32 +1,32 @@
-package com.kubista.repoexplorer.model
+package com.kubista.userexplorer.model
 
-
-data class Values(
-        val values: List<BitBucketRepo>
-)
+import android.arch.persistence.room.PrimaryKey
 
 /**
  * Class which provides a model for post
  * @constructor Sets all properties of the post
+ * @property id the unique identifier of the post
  * @property name the title of the post
  * @property description the content of the post
  */
 
-data class BitBucketRepo(
+data class GitHubRepo(
+        @field:PrimaryKey
+        val id: Int,
         val name: String,
         val description: String,
-        val owner: Owner
+        val owner: GitHubUser
 ) : IRepo {
     override fun isBitbucektRepo(): Boolean {
-        return true
+        return false
     }
 
     override fun getOwnerName(): String {
-        return owner.display_name
+        return owner.login
     }
 
     override fun getOwnerAvatarUrl(): String {
-        return owner.links.avatar.href
+        return owner.avatar_url
     }
 
     override fun getRepositoryTitle(): String {
@@ -38,16 +38,7 @@ data class BitBucketRepo(
     }
 }
 
-
-data class Owner(
-        val links: Links,
-        val display_name: String
-)
-
-data class Links(
-        val avatar: Avatar
-)
-
-data class Avatar(
-        val href: String
+data class GitHubUser(
+        val login: String,
+        val avatar_url: String
 )

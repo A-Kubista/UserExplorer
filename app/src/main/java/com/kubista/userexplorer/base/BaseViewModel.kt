@@ -1,10 +1,10 @@
-package com.kubista.repoexplorer
+package com.kubista.userexplorer
 
 import android.arch.lifecycle.ViewModel
-import com.kubista.repoexplorer.injection.component.DaggerViewModelInjector
-import com.kubista.repoexplorer.injection.component.ViewModelInjector
-import com.kubista.repoexplorer.injection.module.NetworkModule
-import com.kubista.repoexplorer.ui.repo.RepoListViewModel
+import com.kubista.userexplorer.injection.component.DaggerViewModelInjector
+import com.kubista.userexplorer.injection.component.ViewModelInjector
+import com.kubista.userexplorer.injection.module.NetworkModule
+import com.kubista.userexplorer.ui.repo.RepoListViewModel
 
 abstract class BaseViewModel : ViewModel() {
     private val injector: ViewModelInjector = DaggerViewModelInjector

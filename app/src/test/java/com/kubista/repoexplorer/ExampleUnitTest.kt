@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer
+package com.kubista.userexplorer
 
 import org.junit.Test
 

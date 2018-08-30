@@ -1,6 +1,6 @@
-package com.kubista.repoexplorer.network
+package com.kubista.userexplorer.network
 
-import com.kubista.repoexplorer.model.GitHubRepo
+import com.kubista.userexplorer.model.GitHubRepo
 import io.reactivex.Observable
 import retrofit2.http.GET
 

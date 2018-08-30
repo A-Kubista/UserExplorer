@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.model
+package com.kubista.userexplorer.model
 
 interface IRepo {
     fun getOwnerName(): String

@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.ui.repo
+package com.kubista.userexplorer.ui.repo
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,8 +8,8 @@ import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import com.kubista.repoexplorer.R
-import com.kubista.repoexplorer.databinding.ActivityRepoListBinding
+import com.kubista.userexplorer.R
+import com.kubista.userexplorer.databinding.ActivityRepoListBinding
 
 class RepoListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRepoListBinding

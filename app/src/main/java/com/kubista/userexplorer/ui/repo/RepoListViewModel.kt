@@ -1,13 +1,13 @@
-package com.kubista.repoexplorer.ui.repo
+package com.kubista.userexplorer.ui.repo
 
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableBoolean
 import android.view.View
-import com.kubista.repoexplorer.BaseViewModel
-import com.kubista.repoexplorer.R
-import com.kubista.repoexplorer.model.IRepo
-import com.kubista.repoexplorer.network.BitBucketRepoApi
-import com.kubista.repoexplorer.network.GitHubRepoApi
+import com.kubista.userexplorer.BaseViewModel
+import com.kubista.userexplorer.R
+import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.network.BitBucketRepoApi
+import com.kubista.userexplorer.network.GitHubRepoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

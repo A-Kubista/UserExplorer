@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.utils.extension
+package com.kubista.userexplorer.utils.extension
 
 import android.content.ContextWrapper
 import android.support.v7.app.AppCompatActivity

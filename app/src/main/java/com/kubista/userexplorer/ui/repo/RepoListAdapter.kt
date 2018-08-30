@@ -1,4 +1,4 @@
-package com.kubista.repoexplorer.ui.repo
+package com.kubista.userexplorer.ui.repo
 
 import android.content.Context
 import android.content.Intent
@@ -7,11 +7,11 @@ import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.kubista.repoexplorer.R
-import com.kubista.repoexplorer.databinding.ItemRepoBinding
-import com.kubista.repoexplorer.model.IRepo
-import com.kubista.repoexplorer.ui.detail.RepoDetailActivity
-import com.kubista.repoexplorer.utils.*
+import com.kubista.userexplorer.R
+import com.kubista.userexplorer.databinding.ItemRepoBinding
+import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.ui.detail.RepoDetailActivity
+import com.kubista.userexplorer.utils.*
 import java.util.*
 
 
