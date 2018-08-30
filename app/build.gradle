@@ -4,14 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
     dataBinding {
         enabled = true
     }
 
     defaultConfig {
-        applicationId "com.kubista.repoexplorer"
+        applicationId "com.kubista.userexplorer"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -29,6 +29,10 @@ android {
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
     }
+    configurations.all {
+        // make sure picasso depends on right support version
+        resolutionStrategy.force "com.android.support:exifinterface:$android_support_version"
+    }
 }
 
 dependencies {
@@ -40,7 +44,7 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 
-    // Support need to stay 27.1.0 so there is no conflict with picasso
+    // Support
     implementation "com.android.support:appcompat-v7:$android_support_version"
 
     // Support Design
