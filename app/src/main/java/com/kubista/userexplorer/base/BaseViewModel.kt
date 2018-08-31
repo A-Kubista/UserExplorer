@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import com.kubista.userexplorer.injection.component.DaggerViewModelInjector
 import com.kubista.userexplorer.injection.component.ViewModelInjector
 import com.kubista.userexplorer.injection.module.NetworkModule
-import com.kubista.userexplorer.ui.repo.RepoListViewModel
+import com.kubista.userexplorer.ui.user.UserListViewModel
 
 abstract class BaseViewModel : ViewModel() {
     private val injector: ViewModelInjector = DaggerViewModelInjector
@@ -21,7 +21,7 @@ abstract class BaseViewModel : ViewModel() {
      */
     private fun inject() {
         when (this) {
-            is RepoListViewModel -> injector.inject(this)
+            is UserListViewModel -> injector.inject(this)
         }
     }
 }

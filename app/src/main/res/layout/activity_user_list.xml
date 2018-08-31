@@ -6,26 +6,12 @@
 
         <variable
             name="viewModel"
-            type="com.kubista.userexplorer.ui.repo.RepoListViewModel" />
+            type="com.kubista.userexplorer.ui.user.UserListViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:checked="@{viewModel.sortEnabled}"
-            android:onCheckedChanged="@{(switch, checked) -> viewModel.toggleSort(checked)}"
-            android:switchPadding="4dp"
-            android:text="@string/toggle_sort_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progressBar2"
@@ -42,19 +28,18 @@
             android:id="@+id/swipe_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switch1"
-            app:refreshing="@{viewModel.isLoading}"
-            app:onRefreshListener="@{() -> viewModel.loadRepos()}">
+            app:layout_constraintTop_toTopOf="parent"
+            app:onRefreshListener="@{() -> viewModel.loadUsers()}"
+            app:refreshing="@{viewModel.isLoading}">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/repo_list"
+                android:id="@+id/user_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:adapter="@{viewModel.getRepoListAdapter()}" />
+                app:adapter="@{viewModel.getUserListAdapter()}" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </android.support.constraint.ConstraintLayout>

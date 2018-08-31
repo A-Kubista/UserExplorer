@@ -1,7 +1,7 @@
 package com.kubista.userexplorer.injection.component
 
 import com.kubista.userexplorer.injection.module.NetworkModule
-import com.kubista.userexplorer.ui.repo.RepoListViewModel
+import com.kubista.userexplorer.ui.user.UserListViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,10 +12,10 @@ import javax.inject.Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ViewModelInjector {
     /**
-     * Injects required dependencies into the specified RepoListViewModel.
-     * @param postListViewModel RepoListViewModel in which to inject the dependencies
+     * Injects required dependencies into the specified UserListViewModel.
+     * @param postListViewModel UserListViewModel in which to inject the dependencies
      */
-    fun inject(postListViewModel: RepoListViewModel)
+    fun inject(postListViewModel: UserListViewModel)
 
     @Component.Builder
     interface Builder {

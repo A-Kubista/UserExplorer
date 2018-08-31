@@ -12,5 +12,5 @@ interface DailymotionUserApi {
      * Get the list of users from the API
      */
     @GET("users?fields=avatar_360_url,username")
-    fun getRepos(): Observable<DailymotionApiUserList>
+    fun getUsers(): Observable<DailymotionApiUserList>
 }

@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.repo.RepoListActivity">
+        <activity android:name=".ui.user.UserListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.detail.RepoDetailActivity"
+            android:name=".ui.detail.UserDetailActivity"
             android:theme="@style/AppTheme.NoTitle" />
     </application>
 </manifest>

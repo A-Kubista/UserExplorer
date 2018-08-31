@@ -21,9 +21,9 @@ import javax.inject.Named
 @Suppress("unused")
 object NetworkModule {
     /**
-     * Provides the Repo service implementation.
+     * Provides the User service implementation.
      * @param retrofit the Retrofit object used to instantiate the service
-     * @return the Repo service implementation.
+     * @return the User service implementation.
      */
     @Provides
     @Reusable
@@ -33,9 +33,9 @@ object NetworkModule {
     }
 
     /**
-     * Provides the Repo service implementation.
+     * Provides the User service implementation.
      * @param retrofit the Retrofit object used to instantiate the service
-     * @return the Repo service implementation.
+     * @return the User service implementation.
      */
     @Provides
     @Reusable
@@ -63,8 +63,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    @Named("BitBucket")
-    internal fun provideRetrofitInterfaceBitBucket(): Retrofit {
+    @Named("Dailymotion")
+    internal fun provideRetrofitInterfaceDailymotion(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL_DAILYMOTION)
                 .addConverterFactory(MoshiConverterFactory.create())
