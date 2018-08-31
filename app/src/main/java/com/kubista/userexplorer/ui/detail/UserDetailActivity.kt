@@ -23,17 +23,16 @@ class UserDetailActivity : AppCompatActivity() {
 
         val user = object : User() {
             override fun getName(): String {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return "user name"
             }
 
             override fun getAvatarUrl(): String {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return "blank"
             }
 
             override fun getType(): UserType {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return UserType.GITHUB
             }
-
         }
 
         viewModel.bind(user)
