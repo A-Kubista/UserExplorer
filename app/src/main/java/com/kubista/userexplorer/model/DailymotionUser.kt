@@ -1,5 +1,8 @@
 package com.kubista.userexplorer.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 data class DailymotionApiUserList(
         val list: List<DailymotionUser>
@@ -12,10 +15,15 @@ data class DailymotionApiUserList(
  * @property avatar_360_url the url to the avatar of the user
  */
 
+@Parcelize
 data class DailymotionUser(
         val username: String,
         val avatar_360_url: String
-) : User() {
+) : User(), Parcelable {
+    override fun getParcelable(): Parcelable {
+        return this
+    }
+
     override fun getName(): String {
        return username
     }

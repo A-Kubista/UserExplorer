@@ -31,11 +31,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
         holder.bind(userList[position])
         holder.itemView.setOnClickListener {
             val intent = Intent(contex, UserDetailActivity::class.java)
-          /*  intent.putExtra(KEY_OWNER_NAME, userList[position].getOwnerName())
-            intent.putExtra(KEY_OWNER_AVATAR_URL, userList[position].getOwnerAvatarUrl())
-            intent.putExtra(KEY_USER_TITLE, userList[position].getUsersitoryTitle())
-            intent.putExtra(KEY_USER_DESC, userList[position].getUsersitoryDescription())
-            intent.putExtra(KEY_USER_TYPE, userList[position].isBitbucektUser()) */
+            intent.putExtra(KEY_USER_PARCEL,userList[position].getParcelable())
             startActivity(contex, intent, null)
         }
     }

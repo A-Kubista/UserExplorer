@@ -33,6 +33,9 @@ android {
         // make sure picasso depends on right support version
         resolutionStrategy.force "com.android.support:exifinterface:$android_support_version"
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {

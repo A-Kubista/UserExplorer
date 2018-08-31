@@ -3,11 +3,11 @@ package com.kubista.userexplorer.ui.detail
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.databinding.ActivityUserDetailBinding
 import com.kubista.userexplorer.model.User
-import com.kubista.userexplorer.model.UserType
 import com.kubista.userexplorer.utils.*
 
 class UserDetailActivity : AppCompatActivity() {
@@ -21,19 +21,7 @@ class UserDetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(UserDetailViewModel::class.java)
 
-        val user = object : User() {
-            override fun getName(): String {
-                return "user name"
-            }
-
-            override fun getAvatarUrl(): String {
-                return "blank"
-            }
-
-            override fun getType(): UserType {
-                return UserType.GITHUB
-            }
-        }
+        val user =  intent.getParcelableExtra<Parcelable>(KEY_USER_PARCEL) as User
 
         viewModel.bind(user)
         binding.viewModel = viewModel

@@ -1,5 +1,8 @@
 package com.kubista.userexplorer.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * Class which provides a model for mapping GitHub User from response
  * @constructor Sets all properties of the user
@@ -7,10 +10,15 @@ package com.kubista.userexplorer.model
  * @property avatar_url the url of avatar
  */
 
+@Parcelize
 data class GitHubUser(
         val login: String,
         val avatar_url: String
-) : User() {
+) : User(), Parcelable {
+    override fun getParcelable(): Parcelable {
+        return this
+    }
+
     override fun getName(): String {
         return login
     }
@@ -22,5 +30,4 @@ data class GitHubUser(
     override fun getType(): UserType {
        return UserType.GITHUB
     }
-
 }
