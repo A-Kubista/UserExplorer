@@ -1,7 +1,7 @@
 package com.kubista.userexplorer.model
 
 
-data class UserList(
+data class DailymotionApiUserList(
         val list: List<DailymotionUser>
 )
 

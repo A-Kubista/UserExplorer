@@ -1,16 +1,16 @@
 package com.kubista.userexplorer.network
 
-import com.kubista.userexplorer.model.GitHubRepo
+import com.kubista.userexplorer.model.GitHubUser
 import io.reactivex.Observable
 import retrofit2.http.GET
 
 /**
  * The interface which provides methods to get result of webservices
  */
-interface GitHubRepoApi {
+interface GitHubUserApi {
     /**
      * Get the list of the pots from the API
      */
-    @GET("/repositories")
-    fun getRepos(): Observable<List<GitHubRepo>>
+    @GET("/users")
+    fun getUsers(): Observable<List<GitHubUser>>
 }

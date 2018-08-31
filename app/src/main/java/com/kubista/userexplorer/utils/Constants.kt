@@ -2,7 +2,7 @@ package com.kubista.userexplorer.utils
 
 /** The base URL of the API */
 const val BASE_URL_GITHUB: String = "https://api.github.com"
-const val BASE_URL_BITBUCKET: String = "https://api.bitbucket.org/2.0/"
+const val BASE_URL_DAILYMOTION: String = "https://api.dailymotion.com/"
 
 /** keys for bundles */
 const val KEY_OWNER_NAME: String = "owner_name"

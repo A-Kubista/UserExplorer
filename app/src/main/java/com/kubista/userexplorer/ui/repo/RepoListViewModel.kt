@@ -6,7 +6,7 @@ import android.view.View
 import com.kubista.userexplorer.BaseViewModel
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.model.User
-import com.kubista.userexplorer.network.BitBucketRepoApi
+import com.kubista.userexplorer.network.DailymotionUserApi
 import com.kubista.userexplorer.network.GitHubRepoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -18,7 +18,7 @@ class RepoListViewModel : BaseViewModel() {
     @Inject
     lateinit var gitHubRepoApi: GitHubRepoApi
     @Inject
-    lateinit var bitBucketRepoApi: BitBucketRepoApi
+    lateinit var bitBucketRepoApi: DailymotionUserApi
 
     private lateinit var cachedBitbucketRepos: List<User>
 

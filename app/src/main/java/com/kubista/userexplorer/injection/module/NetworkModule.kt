@@ -1,8 +1,8 @@
 package com.kubista.userexplorer.injection.module
 
-import com.kubista.userexplorer.network.BitBucketRepoApi
-import com.kubista.userexplorer.network.GitHubRepoApi
-import com.kubista.userexplorer.utils.BASE_URL_BITBUCKET
+import com.kubista.userexplorer.network.DailymotionUserApi
+import com.kubista.userexplorer.network.GitHubUserApi
+import com.kubista.userexplorer.utils.BASE_URL_DAILYMOTION
 import com.kubista.userexplorer.utils.BASE_URL_GITHUB
 import dagger.Module
 import dagger.Provides
@@ -28,8 +28,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideBitbucketRepoApi(@Named("BitBucket") retrofit: Retrofit): BitBucketRepoApi {
-        return retrofit.create(BitBucketRepoApi::class.java)
+    internal fun provideDailymotionUserApi(@Named("Dailymotion") retrofit: Retrofit): DailymotionUserApi {
+        return retrofit.create(DailymotionUserApi::class.java)
     }
 
     /**
@@ -40,8 +40,8 @@ object NetworkModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideGitHubRepoApi(@Named("GitHub") retrofit: Retrofit): GitHubRepoApi {
-        return retrofit.create(GitHubRepoApi::class.java)
+    internal fun provideGitHubUserApi(@Named("GitHub") retrofit: Retrofit): GitHubUserApi {
+        return retrofit.create(GitHubUserApi::class.java)
     }
 
     /**
@@ -66,7 +66,7 @@ object NetworkModule {
     @Named("BitBucket")
     internal fun provideRetrofitInterfaceBitBucket(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(BASE_URL_BITBUCKET)
+                .baseUrl(BASE_URL_DAILYMOTION)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
