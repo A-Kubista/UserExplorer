@@ -9,15 +9,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.databinding.ItemRepoBinding
-import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.ui.detail.RepoDetailActivity
 import com.kubista.userexplorer.utils.*
 import java.util.*
 
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
-    private lateinit var repoList: List<IRepo>
-    private lateinit var repoListRaw: List<IRepo>
+    private lateinit var repoList: List<User>
+    private lateinit var repoListRaw: List<User>
     private lateinit var contex: Context
     private var sortEnabled: Boolean = false
 
@@ -44,7 +44,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
         return if (::repoList.isInitialized) repoList.size else 0
     }
 
-    fun updateRepoList(repoList: List<IRepo>) {
+    fun updateRepoList(repoList: List<User>) {
         this.repoList = repoList
         this.repoListRaw = repoList.toList()
 
@@ -58,7 +58,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     class ViewHolder(private val binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
         private val viewModel = RepoViewModel()
 
-        fun bind(repo: IRepo) {
+        fun bind(repo: User) {
             viewModel.bind(repo)
             binding.viewModel = viewModel
         }

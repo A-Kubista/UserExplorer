@@ -2,7 +2,7 @@ package com.kubista.userexplorer.ui.detail
 
 import android.view.View
 import com.kubista.userexplorer.BaseViewModel
-import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.model.User
 
 class RepoDetailViewModel : BaseViewModel() {
     private lateinit var repoTitle: String
@@ -11,7 +11,7 @@ class RepoDetailViewModel : BaseViewModel() {
     private lateinit var repoOwnerAvatar: String
     private var isBitbucektRepo: Boolean = false
 
-    fun bind(repo: IRepo) {
+    fun bind(repo: User) {
         repoTitle = repo.getRepositoryTitle()
         repoDesc = repo.getRepositoryDescription()
         repoOwnerLogin = repo.getOwnerName()

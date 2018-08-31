@@ -5,7 +5,7 @@ import android.databinding.ObservableBoolean
 import android.view.View
 import com.kubista.userexplorer.BaseViewModel
 import com.kubista.userexplorer.R
-import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.network.BitBucketRepoApi
 import com.kubista.userexplorer.network.GitHubRepoApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +20,7 @@ class RepoListViewModel : BaseViewModel() {
     @Inject
     lateinit var bitBucketRepoApi: BitBucketRepoApi
 
-    private lateinit var cachedBitbucketRepos: List<IRepo>
+    private lateinit var cachedBitbucketRepos: List<User>
 
     val repoListAdapter: RepoListAdapter = RepoListAdapter()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
@@ -84,12 +84,12 @@ class RepoListViewModel : BaseViewModel() {
         isLoading.set(false)
     }
 
-    private fun onRetrieveGitHubRepoListSuccess(repoList: List<IRepo>) {
+    private fun onRetrieveGitHubRepoListSuccess(repoList: List<User>) {
         val resultList = if (::cachedBitbucketRepos.isInitialized) repoList + cachedBitbucketRepos else repoList
         repoListAdapter.updateRepoList(resultList)
     }
 
-    private fun onRetrieveBitBucketRepoListSuccess(repoList: List<IRepo>) {
+    private fun onRetrieveBitBucketRepoListSuccess(repoList: List<User>) {
         cachedBitbucketRepos = repoList
         loadGitHubRepos()
     }

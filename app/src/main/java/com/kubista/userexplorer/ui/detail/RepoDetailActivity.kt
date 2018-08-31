@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.databinding.ActivityRepoDetailBinding
-import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.utils.*
 
 class RepoDetailActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class RepoDetailActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this).get(RepoDetailViewModel::class.java)
 
-        val repo = object : IRepo {
+        val repo = object : User {
             override fun isBitbucektRepo(): Boolean {
                 return intent.getBooleanExtra(KEY_REPO_TYPE, false)
             }

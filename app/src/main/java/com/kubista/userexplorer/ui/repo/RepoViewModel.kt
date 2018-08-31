@@ -3,7 +3,7 @@ package com.kubista.userexplorer.ui.repo
 import android.arch.lifecycle.MutableLiveData
 import android.view.View
 import com.kubista.userexplorer.BaseViewModel
-import com.kubista.userexplorer.model.IRepo
+import com.kubista.userexplorer.model.User
 
 class RepoViewModel : BaseViewModel() {
     private val repoTitle = MutableLiveData<String>()
@@ -12,7 +12,7 @@ class RepoViewModel : BaseViewModel() {
     private val repoOwnerAvatar = MutableLiveData<String>()
     private val isBitbucektRepo = MutableLiveData<Boolean>()
 
-    fun bind(repo: IRepo) {
+    fun bind(repo: User) {
         repoTitle.value = repo.getRepositoryTitle()
         repoDesc.value = repo.getRepositoryDescription()
         repoOwnerLogin.value = repo.getOwnerName()
