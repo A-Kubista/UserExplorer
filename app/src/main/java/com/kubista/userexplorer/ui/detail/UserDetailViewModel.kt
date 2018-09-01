@@ -1,7 +1,7 @@
 package com.kubista.userexplorer.ui.detail
 
 import android.view.View
-import com.kubista.userexplorer.BaseViewModel
+import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.model.UserType
 

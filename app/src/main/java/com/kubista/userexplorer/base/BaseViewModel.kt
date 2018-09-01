@@ -1,4 +1,4 @@
-package com.kubista.userexplorer
+package com.kubista.userexplorer.base
 
 import android.arch.lifecycle.ViewModel
 import com.kubista.userexplorer.injection.component.DaggerViewModelInjector

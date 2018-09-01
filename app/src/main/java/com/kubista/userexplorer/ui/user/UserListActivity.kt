@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.kubista.userexplorer.R
@@ -20,22 +21,9 @@ class UserListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_list)
-        binding.userList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         viewModel = ViewModelProviders.of(this).get(UserListViewModel::class.java)
-        viewModel.errorMessage.observe(this, Observer { errorMessage ->
-            if (errorMessage != null) showError(errorMessage) else hideError()
-        })
+
         binding.viewModel = viewModel
-    }
-
-    private fun showError(@StringRes errorMessage: Int) {
-        errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
-        errorSnackbar?.show()
-    }
-
-    private fun hideError() {
-        errorSnackbar?.dismiss()
     }
 }
