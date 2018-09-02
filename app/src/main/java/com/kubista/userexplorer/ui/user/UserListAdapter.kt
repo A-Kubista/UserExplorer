@@ -11,15 +11,12 @@ import com.kubista.userexplorer.R
 import com.kubista.userexplorer.databinding.ItemUserBinding
 import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.ui.detail.UserDetailActivity
-import com.kubista.userexplorer.utils.*
-import java.util.*
+import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     private lateinit var userList: List<User>
-    private lateinit var userListRaw: List<User>
     private lateinit var context: Context
-    private var sortEnabled: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListAdapter.ViewHolder {
         context = parent.context
@@ -31,7 +28,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
         holder.bind(userList[position])
         holder.itemView.setOnClickListener {
             val intent = Intent(context, UserDetailActivity::class.java)
-            intent.putExtra(KEY_USER_PARCEL,userList[position].getParcelable())
+            intent.putExtra(KEY_USER_PARCEL, userList[position].getParcelable())
             startActivity(context, intent, null)
         }
     }
@@ -42,11 +39,6 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
     fun updateUserList(userList: List<User>) {
         this.userList = userList
-        this.userListRaw = userList.toList()
-
-        if (sortEnabled) {
-            sortUserList()
-        }
 
         notifyDataSetChanged()
     }
@@ -59,27 +51,4 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
             binding.viewModel = viewModel
         }
     }
-
-    fun toggleSort(sortEnabled: Boolean) {
-        this.sortEnabled = sortEnabled
-
-        if (sortEnabled) {
-            sortUserList()
-        } else {
-            userList = userListRaw.toList()
-        }
-
-        notifyDataSetChanged()
-    }
-
-    private fun sortUserList() {
-        Collections.sort(userList) { lhs, rhs ->
-            when {
-                lhs.getName().capitalize() > rhs.getName().capitalize() -> 1
-                lhs.getName().capitalize() < rhs.getName().capitalize() -> -1
-                else -> 0
-            }
-        }
-    }
-
 }

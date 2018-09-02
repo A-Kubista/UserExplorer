@@ -28,7 +28,6 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
     val userListAdapter: UserListAdapter = UserListAdapter()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     var isLoading = ObservableBoolean()
-    var sortEnabled = ObservableBoolean()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
         loadGitHubUsers()
@@ -45,8 +44,10 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        if (::subscriptionGitHubApi.isInitialized) subscriptionGitHubApi.dispose()
-        if (::subscriptionDailymotionApi.isInitialized) subscriptionDailymotionApi.dispose()
+        if (::subscriptionGitHubApi.isInitialized)
+            subscriptionGitHubApi.dispose()
+        if (::subscriptionDailymotionApi.isInitialized)
+            subscriptionDailymotionApi.dispose()
     }
 
     fun loadUsers() {
@@ -89,7 +90,10 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
     }
 
     private fun onRetrieveGitHubUserListSuccess(userList: List<User>) {
-        val resultList = if (::cachedDailymotionUsers.isInitialized) userList + cachedDailymotionUsers else userList
+        val resultList =
+                if (::cachedDailymotionUsers.isInitialized)
+                    userList + cachedDailymotionUsers
+                else userList
         userListAdapter.updateUserList(resultList)
     }
 
@@ -100,11 +104,6 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
 
     private fun onRetrieveUserListError() {
         errorMessage.value = R.string.fetch_error
-    }
-
-    fun toggleSort(value: Boolean) {
-        sortEnabled.set(!sortEnabled.get())
-        userListAdapter.toggleSort(sortEnabled.get())
     }
 
     fun saveInstance(bundle: Bundle) {
