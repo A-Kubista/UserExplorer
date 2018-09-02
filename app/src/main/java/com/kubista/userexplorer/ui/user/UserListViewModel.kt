@@ -2,19 +2,22 @@ package com.kubista.userexplorer.ui.user
 
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableBoolean
+import android.os.Bundle
 import android.view.View
-import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.R
+import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.network.DailymotionUserApi
 import com.kubista.userexplorer.network.GitHubUserApi
+import com.kubista.userexplorer.utils.KEY_ERROR_MESSAGE_PARCEL
+import com.kubista.userexplorer.utils.NO_INT_VAL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class UserListViewModel : BaseViewModel() {
+class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
     @Inject
     lateinit var gitHubUserApi: GitHubUserApi
     @Inject
@@ -36,13 +39,14 @@ class UserListViewModel : BaseViewModel() {
     private lateinit var subscriptionDailymotionApi: Disposable
 
     init {
+        readSavedInstance(bundle)
         loadUsers()
     }
 
     override fun onCleared() {
         super.onCleared()
-        subscriptionGitHubApi.dispose()
-        subscriptionDailymotionApi.dispose()
+        if (::subscriptionGitHubApi.isInitialized) subscriptionGitHubApi.dispose()
+        if (::subscriptionDailymotionApi.isInitialized) subscriptionDailymotionApi.dispose()
     }
 
     fun loadUsers() {
@@ -101,6 +105,18 @@ class UserListViewModel : BaseViewModel() {
     fun toggleSort(value: Boolean) {
         sortEnabled.set(!sortEnabled.get())
         userListAdapter.toggleSort(sortEnabled.get())
+    }
+
+    fun saveInstance(bundle: Bundle) {
+        if (errorMessage.value != null) bundle.putInt(KEY_ERROR_MESSAGE_PARCEL, errorMessage.value!!)
+    }
+
+    private fun readSavedInstance(bundle: Bundle?) {
+        if (bundle != null) {
+            val savedMessage = bundle.getInt(KEY_ERROR_MESSAGE_PARCEL, NO_INT_VAL)
+            if (savedMessage != NO_INT_VAL)
+                errorMessage.value = savedMessage
+        }
     }
 }
 

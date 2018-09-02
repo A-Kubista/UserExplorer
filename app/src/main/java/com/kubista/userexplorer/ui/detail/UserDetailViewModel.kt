@@ -1,27 +1,32 @@
 package com.kubista.userexplorer.ui.detail
 
+import android.os.Bundle
 import android.view.View
 import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.model.User
-import com.kubista.userexplorer.model.UserType
+import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
-class UserDetailViewModel : BaseViewModel() {
-    private lateinit var name: String
-    private lateinit var avatarUrl: String
-    private lateinit var type: UserType
+class UserDetailViewModel(cachedUser: User?) : BaseViewModel() {
 
-    fun bind(user: User) {
-        name = user.getName()
-        avatarUrl = user.getAvatarUrl()
-        type = user.getType()
+    /**
+     *  normally you should not save complex object to bundle,
+     *  but rather id of an object to retrieve it again from storage,
+     *  however user object contains only 3 fields
+     *  */
+    fun saveInstance(bundle: Bundle) {
+        if (user != null) {
+            bundle.putParcelable(KEY_USER_PARCEL, user.getParcelable())
+        }
     }
 
+    private val user: User? = cachedUser
+
     fun getAvatarUrl(): String {
-        return avatarUrl
+        return user?.getAvatarUrl() ?: ""
     }
 
     fun getUserName(): String {
-        return name
+        return user?.getName() ?: ""
     }
 
     fun getBitBucketLogoVisibility(): Int {

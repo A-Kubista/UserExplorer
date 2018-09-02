@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kubista.userexplorer.R
+import com.kubista.userexplorer.base.viewModelFactory
 import com.kubista.userexplorer.databinding.FragmentUserListBinding
 
 
@@ -23,7 +24,7 @@ class UserListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(UserListViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!,viewModelFactory{UserListViewModel(savedInstanceState)}).get(UserListViewModel::class.java)
     }
 
     private fun showError(@StringRes errorMessage: Int) {

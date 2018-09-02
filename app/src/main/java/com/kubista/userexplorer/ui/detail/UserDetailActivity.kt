@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
 import com.kubista.userexplorer.R
+import com.kubista.userexplorer.base.viewModelFactory
 import com.kubista.userexplorer.databinding.ActivityUserDetailBinding
 import com.kubista.userexplorer.model.User
-import com.kubista.userexplorer.utils.*
+import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
 class UserDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserDetailBinding
@@ -19,11 +20,23 @@ class UserDetailActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_detail)
 
-        viewModel = ViewModelProviders.of(this).get(UserDetailViewModel::class.java)
+        var userParcel = intent.getParcelableExtra<Parcelable>(KEY_USER_PARCEL)
+        if (userParcel == null && savedInstanceState != null) {
+            userParcel = savedInstanceState.getParcelable(KEY_USER_PARCEL)
+        }
 
-        val user =  intent.getParcelableExtra<Parcelable>(KEY_USER_PARCEL) as User
+        val user = if (userParcel != null) userParcel as User else null
 
-        viewModel.bind(user)
+        viewModel = ViewModelProviders.of(
+                this,
+                viewModelFactory { UserDetailViewModel(user) }
+        ).get(UserDetailViewModel::class.java)
+
         binding.viewModel = viewModel
+    }
+
+    public override fun onSaveInstanceState(bundle: Bundle) {
+        super.onSaveInstanceState(bundle)
+        viewModel.saveInstance(bundle)
     }
 }

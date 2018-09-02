@@ -1,6 +1,7 @@
 package com.kubista.userexplorer.base
 
 import android.arch.lifecycle.ViewModel
+import android.os.Bundle
 import com.kubista.userexplorer.injection.component.DaggerViewModelInjector
 import com.kubista.userexplorer.injection.component.ViewModelInjector
 import com.kubista.userexplorer.injection.module.NetworkModule

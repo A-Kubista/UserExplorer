@@ -18,21 +18,21 @@ import java.util.*
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     private lateinit var userList: List<User>
     private lateinit var userListRaw: List<User>
-    private lateinit var contex: Context
+    private lateinit var context: Context
     private var sortEnabled: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListAdapter.ViewHolder {
-        contex = parent.context
-        val binding: ItemUserBinding = DataBindingUtil.inflate(LayoutInflater.from(contex), R.layout.item_user, parent, false)
+        context = parent.context
+        val binding: ItemUserBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_user, parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserListAdapter.ViewHolder, position: Int) {
         holder.bind(userList[position])
         holder.itemView.setOnClickListener {
-            val intent = Intent(contex, UserDetailActivity::class.java)
+            val intent = Intent(context, UserDetailActivity::class.java)
             intent.putExtra(KEY_USER_PARCEL,userList[position].getParcelable())
-            startActivity(contex, intent, null)
+            startActivity(context, intent, null)
         }
     }
 
