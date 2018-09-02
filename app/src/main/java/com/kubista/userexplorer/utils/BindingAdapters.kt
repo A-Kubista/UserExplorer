@@ -22,7 +22,9 @@ fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
 fun setMutableVisibility(view: View, visibility: MutableLiveData<Int>?) {
     val parentActivity: AppCompatActivity? = view.getParentActivity()
     if (parentActivity != null && visibility != null) {
-        visibility.observe(parentActivity, Observer { value -> view.visibility = value ?: View.VISIBLE })
+        visibility.observe(parentActivity, Observer { value ->
+            view.visibility = value ?: View.VISIBLE
+        })
     }
 }
 
@@ -40,4 +42,9 @@ fun loadImage(view: ImageView, imageUrl: String) {
             .load(imageUrl)
             .placeholder(R.drawable.placeholder)
             .into(view)
+}
+
+@BindingAdapter("android:src")
+fun setImageSrc(view: ImageView, resourceId: Int) {
+    view.setImageResource(resourceId)
 }

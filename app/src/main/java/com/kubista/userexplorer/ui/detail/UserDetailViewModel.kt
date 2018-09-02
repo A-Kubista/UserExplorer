@@ -1,9 +1,10 @@
 package com.kubista.userexplorer.ui.detail
 
 import android.os.Bundle
-import android.view.View
+import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.model.User
+import com.kubista.userexplorer.model.UserType
 import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
 class UserDetailViewModel(cachedUser: User?) : BaseViewModel() {
@@ -29,7 +30,7 @@ class UserDetailViewModel(cachedUser: User?) : BaseViewModel() {
         return user?.getName() ?: ""
     }
 
-    fun getBitBucketLogoVisibility(): Int {
-        return View.VISIBLE
+    fun getImageTypeResource(): Int {
+        return if (user?.getType() == UserType.GITHUB) R.drawable.logo_github else R.drawable.logo_dailymotion
     }
 }

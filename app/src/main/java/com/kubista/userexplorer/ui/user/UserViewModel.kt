@@ -1,6 +1,7 @@
 package com.kubista.userexplorer.ui.user
 
 import android.arch.lifecycle.MutableLiveData
+import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.model.UserType
@@ -24,7 +25,7 @@ class UserViewModel : BaseViewModel() {
         return name
     }
 
-    fun getBitBucketLogoVisibility(): MutableLiveData<UserType> {
-        return type
+    fun getImageTypeResource(): Int {
+        return if (type.value == UserType.GITHUB) R.drawable.logo_github else R.drawable.logo_dailymotion
     }
 }
