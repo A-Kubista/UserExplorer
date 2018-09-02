@@ -1,7 +1,10 @@
 package com.kubista.userexplorer.injection.component
 
+import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.injection.module.NetworkModule
+import com.kubista.userexplorer.ui.detail.UserDetailViewModel
 import com.kubista.userexplorer.ui.user.UserListViewModel
+import com.kubista.userexplorer.ui.user.UserViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,6 +19,8 @@ interface ViewModelInjector {
      * @param postListViewModel UserListViewModel in which to inject the dependencies
      */
     fun inject(postListViewModel: UserListViewModel)
+    fun inject(userDetailViewModel: UserDetailViewModel)
+    fun inject(userViewModel: UserViewModel)
 
     @Component.Builder
     interface Builder {

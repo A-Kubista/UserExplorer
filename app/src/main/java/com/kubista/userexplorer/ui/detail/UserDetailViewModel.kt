@@ -8,6 +8,9 @@ import com.kubista.userexplorer.model.UserType
 import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
 class UserDetailViewModel(cachedUser: User?) : BaseViewModel() {
+    override fun inject() {
+        injector.inject(this)
+    }
 
     /**
      *  normally you should not save complex object to bundle,

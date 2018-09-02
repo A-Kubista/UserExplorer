@@ -7,6 +7,10 @@ import com.kubista.userexplorer.model.User
 import com.kubista.userexplorer.model.UserType
 
 class UserViewModel : BaseViewModel() {
+    override fun inject() {
+        injector.inject(this)
+    }
+
     private val name = MutableLiveData<String>()
     private val avatarUrl = MutableLiveData<String>()
     private val type = MutableLiveData<UserType>()

@@ -18,6 +18,10 @@ import javax.inject.Inject
 
 
 class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
+    override fun inject() {
+        injector.inject(this)
+    }
+
     @Inject
     lateinit var gitHubUserApi: GitHubUserApi
     @Inject
