@@ -25,6 +25,10 @@ data class DailymotionUser(
         val username: String,
         val avatar_360_url: String
 ) : User(), Parcelable {
+    override fun getUniqueId(): Int {
+        return id
+    }
+
     override fun getParcelable(): Parcelable {
         return this
     }
@@ -40,5 +44,4 @@ data class DailymotionUser(
     override fun getType(): UserType {
         return UserType.DAILYMOTION
     }
-
 }

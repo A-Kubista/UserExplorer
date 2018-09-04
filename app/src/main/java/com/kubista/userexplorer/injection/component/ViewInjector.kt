@@ -4,6 +4,7 @@ import android.app.Application
 import com.kubista.userexplorer.injection.module.AppModule
 import com.kubista.userexplorer.injection.module.DatabaseModule
 import com.kubista.userexplorer.model.user.UserDao
+import com.kubista.userexplorer.ui.detail.UserDetailActivity
 import com.kubista.userexplorer.ui.user.UserListActivity
 import com.kubista.userexplorer.ui.user.UserListFragment
 import dagger.Component
@@ -23,6 +24,7 @@ interface ViewInjector {
     fun inject(userDao: UserDao)
     fun inject(userListFragment: UserListFragment)
     fun inject(userListActivity: UserListActivity)
+    fun inject(userDetailActivity: UserDetailActivity)
 
     @Component.Builder
     interface Builder {

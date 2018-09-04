@@ -7,5 +7,6 @@ abstract class User {
     abstract fun getName(): String
     abstract fun getAvatarUrl(): String
     abstract fun getType(): UserType
-    abstract fun getParcelable() : Parcelable
+    abstract fun getParcelable(): Parcelable
+    abstract fun getUniqueId(): Int
 }

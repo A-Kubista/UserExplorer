@@ -19,9 +19,19 @@ class UserRepository @Inject constructor(userDao: UserDao, gitHubUserApi: GitHub
 
 
     @Throws(ExecutionException::class, InterruptedException::class)
-    fun getUsers(): List<DailymotionUser> {
+    fun getDailyUsermotionById(id: Int): User {
 
-        val callable = Callable<List<DailymotionUser>> { userDao.getAllFromDailymotion }
+        val callable = Callable<DailymotionUser> { userDao.getDailmotionById(id) }
+
+        val future = Executors.newSingleThreadExecutor().submit(callable)
+
+        return future.get()
+    }
+
+    @Throws(ExecutionException::class, InterruptedException::class)
+    fun getGithubUsermotionById(id: Int): User {
+
+        val callable = Callable<GitHubUser> { userDao.getGitHubById(id) }
 
         val future = Executors.newSingleThreadExecutor().submit(callable)
 

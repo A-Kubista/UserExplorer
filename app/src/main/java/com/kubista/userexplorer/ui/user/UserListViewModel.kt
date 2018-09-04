@@ -23,11 +23,6 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
         injector.inject(this)
     }
 
-    @Inject
-    lateinit var gitHubUserApi: GitHubUserApi
-    @Inject
-    lateinit var dailymotionUserApi: DailymotionUserApi
-
     private lateinit var cachedDailymotionUsers: List<User>
 
     val userListAdapter: UserListAdapter = UserListAdapter()

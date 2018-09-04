@@ -20,6 +20,9 @@ data class GitHubUser(
         val login: String,
         val avatar_url: String
 ) : User(), Parcelable {
+    override fun getUniqueId(): Int {
+        return id
+    }
 
     override fun getParcelable(): Parcelable {
         return this

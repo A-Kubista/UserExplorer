@@ -39,7 +39,6 @@ class UserListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // val db = Room.databaseBuilder(context!!, AppDatabase::class.java, "users").build()
         DaggerViewInjector
                 .builder()
                 .appModule(AppModule(activity!!.application))
