@@ -48,6 +48,7 @@ class UserListFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.userList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
