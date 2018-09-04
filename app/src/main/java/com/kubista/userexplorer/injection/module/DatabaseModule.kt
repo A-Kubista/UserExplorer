@@ -13,10 +13,10 @@ import javax.inject.Singleton
 
 
 /**
- * Module which provides all required dependencies about network
+ * Module which provides getAllFromDailymotion required dependencies about network
  */
 
-@Module(includes  = [(NetworkModule::class)])
+@Module(includes = [(NetworkModule::class)])
 class DatabaseModule(mApplication: Application) {
 
     private val appDatabase: AppDatabase = Room.databaseBuilder(

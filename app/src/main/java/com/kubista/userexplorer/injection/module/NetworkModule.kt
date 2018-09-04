@@ -14,7 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Named
 
 /**
- * Module which provides all required dependencies about network
+ * Module which provides getAllFromDailymotion required dependencies about network
  */
 @Module
 // Safe here as we are dealing with a Dagger 2 module

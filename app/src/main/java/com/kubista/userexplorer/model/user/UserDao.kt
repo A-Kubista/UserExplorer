@@ -8,11 +8,15 @@ import android.arch.persistence.room.Query
 @Dao
 interface UserDao {
     @get:Query("SELECT * FROM dailymotionuser")
-    val all: List<DailymotionUser>
+    val getAllFromDailymotion: List<DailymotionUser>
+
+    @get:Query("SELECT * FROM githubuser")
+    val getAllFromGithub: List<GitHubUser>
 
     @Insert
     fun insertAll(vararg users: DailymotionUser)
 
-    @Query("DELETE FROM dailymotionuser")
-    fun clearData()
+    @Insert
+    fun insertAll(vararg users: GitHubUser)
+
 }

@@ -14,9 +14,7 @@ import com.kubista.userexplorer.network.DailymotionUserApi
 import com.kubista.userexplorer.network.GitHubUserApi
 import com.kubista.userexplorer.utils.KEY_ERROR_MESSAGE_PARCEL
 import com.kubista.userexplorer.utils.NO_INT_VAL
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
@@ -44,7 +42,7 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
     private lateinit var subscriptionGitHubApi: Disposable
     private lateinit var subscriptionDailymotionApi: Disposable
     private val userDao: UserDao = userDao
-    private val userRepository: UserRepository  = userRepository
+    private val userRepository: UserRepository = userRepository
 
     init {
         readSavedInstance(bundle)
@@ -64,9 +62,7 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
     }
 
     private fun loadGitHubUsers() {
-        subscriptionGitHubApi = gitHubUserApi.getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        subscriptionGitHubApi = userRepository.getGitHubUsers()
                 .doOnSubscribe { onRetrieveUserListStart() }
                 .doOnTerminate { onRetrieveUserListFinish() }
                 .subscribe(

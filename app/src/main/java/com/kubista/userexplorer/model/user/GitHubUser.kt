@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 /**
  * Class which provides a model for mapping GitHub User from response
- * @constructor Sets all properties of the user
+ * @constructor Sets getAllFromDailymotion properties of the user
  * @property login the name of the  user
  * @property avatar_url the url of avatar
  */
@@ -34,6 +34,6 @@ data class GitHubUser(
     }
 
     override fun getType(): UserType {
-       return UserType.GITHUB
+        return UserType.GITHUB
     }
 }

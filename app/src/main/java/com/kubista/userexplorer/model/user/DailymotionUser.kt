@@ -12,7 +12,7 @@ data class DailymotionApiUserList(
 
 /**
  * Class which provides a model for mapping Dailymotion User from response
- * @constructor Sets all properties of the user
+ * @constructor Sets getAllFromDailymotion properties of the user
  * @property username the name of the user
  * @property avatar_360_url the url to the avatar of the user
  */
@@ -30,7 +30,7 @@ data class DailymotionUser(
     }
 
     override fun getName(): String {
-       return username
+        return username
     }
 
     override fun getAvatarUrl(): String {
