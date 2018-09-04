@@ -3,6 +3,8 @@ package com.kubista.userexplorer.base
 import android.arch.lifecycle.ViewModel
 import com.kubista.userexplorer.injection.component.DaggerViewModelInjector
 import com.kubista.userexplorer.injection.component.ViewModelInjector
+import com.kubista.userexplorer.injection.module.AppModule
+import com.kubista.userexplorer.injection.module.DatabaseModule
 import com.kubista.userexplorer.injection.module.NetworkModule
 
 abstract class BaseViewModel : ViewModel() {

@@ -3,8 +3,8 @@ package com.kubista.userexplorer.ui.user
 import android.arch.lifecycle.MutableLiveData
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.BaseViewModel
-import com.kubista.userexplorer.model.User
-import com.kubista.userexplorer.model.UserType
+import com.kubista.userexplorer.model.user.User
+import com.kubista.userexplorer.model.user.UserType
 
 class UserViewModel : BaseViewModel() {
     override fun inject() {

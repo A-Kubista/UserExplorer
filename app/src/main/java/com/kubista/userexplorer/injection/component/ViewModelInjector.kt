@@ -1,6 +1,5 @@
 package com.kubista.userexplorer.injection.component
 
-import com.kubista.userexplorer.base.BaseViewModel
 import com.kubista.userexplorer.injection.module.NetworkModule
 import com.kubista.userexplorer.ui.detail.UserDetailViewModel
 import com.kubista.userexplorer.ui.user.UserListViewModel
@@ -25,7 +24,6 @@ interface ViewModelInjector {
     @Component.Builder
     interface Builder {
         fun build(): ViewModelInjector
-
         fun networkModule(networkModule: NetworkModule): Builder
     }
 }

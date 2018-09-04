@@ -15,8 +15,14 @@ import android.view.ViewGroup
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.viewModelFactory
 import com.kubista.userexplorer.databinding.FragmentUserListBinding
+import com.kubista.userexplorer.injection.component.DaggerViewInjector
+import com.kubista.userexplorer.injection.module.AppModule
+import com.kubista.userexplorer.injection.module.DatabaseModule
+import com.kubista.userexplorer.model.user.UserDao
+import com.kubista.userexplorer.model.user.UserRepository
 import com.kubista.userexplorer.ui.detail.UserDetailActivity
 import com.kubista.userexplorer.utils.KEY_USER_PARCEL
+import javax.inject.Inject
 
 
 class UserListFragment : Fragment() {
@@ -25,9 +31,22 @@ class UserListFragment : Fragment() {
     private lateinit var viewModel: UserListViewModel
     private var errorSnackbar: Snackbar? = null
 
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    @Inject
+    lateinit var userDao: UserDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!, viewModelFactory { UserListViewModel(savedInstanceState) }).get(UserListViewModel::class.java)
+        // val db = Room.databaseBuilder(context!!, AppDatabase::class.java, "users").build()
+        DaggerViewInjector
+                .builder()
+                .appModule(AppModule(activity!!.application))
+                .databaseModule(DatabaseModule(activity!!.application))
+                .build()
+                .inject(this)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory { UserListViewModel(savedInstanceState, userRepository, userDao) }).get(UserListViewModel::class.java)
     }
 
     private fun showError(@StringRes errorMessage: Int) {

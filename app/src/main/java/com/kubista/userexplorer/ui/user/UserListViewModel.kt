@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.View
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.BaseViewModel
-import com.kubista.userexplorer.model.User
+import com.kubista.userexplorer.model.user.DailymotionUser
+import com.kubista.userexplorer.model.user.User
+import com.kubista.userexplorer.model.user.UserDao
+import com.kubista.userexplorer.model.user.UserRepository
 import com.kubista.userexplorer.network.DailymotionUserApi
 import com.kubista.userexplorer.network.GitHubUserApi
 import com.kubista.userexplorer.utils.KEY_ERROR_MESSAGE_PARCEL
@@ -17,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
+class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao: UserDao) : BaseViewModel() {
     override fun inject() {
         injector.inject(this)
     }
@@ -40,6 +43,8 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
 
     private lateinit var subscriptionGitHubApi: Disposable
     private lateinit var subscriptionDailymotionApi: Disposable
+    private val userDao: UserDao = userDao
+    private val userRepository: UserRepository  = userRepository
 
     init {
         readSavedInstance(bundle)
@@ -71,13 +76,11 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
     }
 
     private fun loadUsersDailymotion() {
-        subscriptionDailymotionApi = dailymotionUserApi.getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        subscriptionDailymotionApi = userRepository.getDailymotionUsers()
                 .doOnSubscribe { onRetrieveUserListStart() }
                 .doOnTerminate { onRetrieveUserListFinish() }
                 .subscribe(
-                        { result -> onRetrieveDailymotionUserListSuccess(result.list) },
+                        { result -> onRetrieveDailymotionUserListSuccess(result) },
                         { onRetrieveUserListError() }
                 )
     }
@@ -101,7 +104,7 @@ class UserListViewModel(bundle: Bundle?) : BaseViewModel() {
         userListAdapter.updateUserList(resultList)
     }
 
-    private fun onRetrieveDailymotionUserListSuccess(userList: List<User>) {
+    private fun onRetrieveDailymotionUserListSuccess(userList: List<DailymotionUser>) {
         cachedDailymotionUsers = userList
         loadGitHubUsers()
     }

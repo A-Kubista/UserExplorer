@@ -1,5 +1,7 @@
-package com.kubista.userexplorer.model
+package com.kubista.userexplorer.model.user
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -15,8 +17,11 @@ data class DailymotionApiUserList(
  * @property avatar_360_url the url to the avatar of the user
  */
 
+@Entity
 @Parcelize
 data class DailymotionUser(
+        @PrimaryKey(autoGenerate = true)
+        val id: Int,
         val username: String,
         val avatar_360_url: String
 ) : User(), Parcelable {

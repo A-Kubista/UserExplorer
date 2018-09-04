@@ -1,6 +1,6 @@
 package com.kubista.userexplorer.network
 
-import com.kubista.userexplorer.model.DailymotionApiUserList
+import com.kubista.userexplorer.model.user.DailymotionApiUserList
 import io.reactivex.Observable
 import retrofit2.http.GET
 

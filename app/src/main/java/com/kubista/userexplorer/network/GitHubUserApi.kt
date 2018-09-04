@@ -1,6 +1,6 @@
 package com.kubista.userexplorer.network
 
-import com.kubista.userexplorer.model.GitHubUser
+import com.kubista.userexplorer.model.user.GitHubUser
 import io.reactivex.Observable
 import retrofit2.http.GET
 

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.databinding.ItemUserBinding
-import com.kubista.userexplorer.model.User
+import com.kubista.userexplorer.model.user.User
 import com.kubista.userexplorer.utils.SingleLiveData
 
 

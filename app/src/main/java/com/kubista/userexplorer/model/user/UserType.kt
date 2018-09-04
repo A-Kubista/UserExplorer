@@ -1,4 +1,4 @@
-package com.kubista.userexplorer.model
+package com.kubista.userexplorer.model.user
 
 enum class UserType {
     GITHUB,

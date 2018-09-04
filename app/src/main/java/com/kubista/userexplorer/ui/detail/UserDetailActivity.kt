@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import com.kubista.userexplorer.R
 import com.kubista.userexplorer.base.viewModelFactory
 import com.kubista.userexplorer.databinding.ActivityUserDetailBinding
-import com.kubista.userexplorer.model.User
+import com.kubista.userexplorer.model.user.User
 import com.kubista.userexplorer.utils.KEY_USER_PARCEL
 
 class UserDetailActivity : AppCompatActivity() {

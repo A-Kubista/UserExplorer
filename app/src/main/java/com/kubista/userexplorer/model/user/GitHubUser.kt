@@ -1,5 +1,7 @@
-package com.kubista.userexplorer.model
+package com.kubista.userexplorer.model.user
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -10,11 +12,15 @@ import kotlinx.android.parcel.Parcelize
  * @property avatar_url the url of avatar
  */
 
+@Entity
 @Parcelize
 data class GitHubUser(
+        @PrimaryKey(autoGenerate = true)
+        val id: Int,
         val login: String,
         val avatar_url: String
 ) : User(), Parcelable {
+
     override fun getParcelable(): Parcelable {
         return this
     }

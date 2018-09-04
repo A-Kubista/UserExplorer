@@ -1,4 +1,4 @@
-package com.kubista.userexplorer.model
+package com.kubista.userexplorer.model.user
 
 import android.os.Parcelable
 
