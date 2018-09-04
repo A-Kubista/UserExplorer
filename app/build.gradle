@@ -88,4 +88,8 @@ dependencies {
 
     //CircleImageView
     implementation "de.hdodenhof:circleimageview:$circural_image_view_version"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 }
