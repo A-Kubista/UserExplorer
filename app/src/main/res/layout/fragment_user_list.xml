@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:onRefreshListener="@{() -> viewModel.loadUsers()}"
+            app:onRefreshListener="@{() -> viewModel.loadUsers(true)}"
             app:refreshing="@{viewModel.isLoading}">
 
             <android.support.v7.widget.RecyclerView

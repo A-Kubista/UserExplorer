@@ -35,8 +35,8 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
     var isLoading = ObservableBoolean()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener {
-        loadGitHubUsers()
-        loadUsersDailymotion()
+        loadGitHubUsers(true)
+        loadUsersDailymotion(true)
     }
 
     private lateinit var subscriptionGitHubApi: Disposable
@@ -46,7 +46,7 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
 
     init {
         readSavedInstance(bundle)
-        loadUsers()
+        loadUsers(false)
     }
 
     override fun onCleared() {
@@ -57,12 +57,12 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
             subscriptionDailymotionApi.dispose()
     }
 
-    fun loadUsers() {
-        loadUsersDailymotion()
+    fun loadUsers(fresh : Boolean) {
+        loadUsersDailymotion(fresh)
     }
 
-    private fun loadGitHubUsers() {
-        subscriptionGitHubApi = userRepository.getGitHubUsers()
+    private fun loadGitHubUsers(fresh : Boolean) {
+        subscriptionGitHubApi = userRepository.getGitHubUsers(fresh)
                 .doOnSubscribe { onRetrieveUserListStart() }
                 .doOnTerminate { onRetrieveUserListFinish() }
                 .subscribe(
@@ -71,12 +71,12 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
                 )
     }
 
-    private fun loadUsersDailymotion() {
-        subscriptionDailymotionApi = userRepository.getDailymotionUsers()
+    private fun loadUsersDailymotion(fresh : Boolean) {
+        subscriptionDailymotionApi = userRepository.getDailymotionUsers(fresh)
                 .doOnSubscribe { onRetrieveUserListStart() }
                 .doOnTerminate { onRetrieveUserListFinish() }
                 .subscribe(
-                        { result -> onRetrieveDailymotionUserListSuccess(result) },
+                        { result -> onRetrieveDailymotionUserListSuccess(result,fresh) },
                         { onRetrieveUserListError() }
                 )
     }
@@ -100,9 +100,9 @@ class UserListViewModel(bundle: Bundle?, userRepository: UserRepository, userDao
         userListAdapter.updateUserList(resultList)
     }
 
-    private fun onRetrieveDailymotionUserListSuccess(userList: List<DailymotionUser>) {
+    private fun onRetrieveDailymotionUserListSuccess(userList: List<DailymotionUser>, fresh: Boolean) {
         cachedDailymotionUsers = userList
-        loadGitHubUsers()
+        loadGitHubUsers(fresh)
     }
 
     private fun onRetrieveUserListError() {

@@ -19,4 +19,10 @@ interface UserDao {
     @Insert
     fun insertAll(vararg users: GitHubUser)
 
+    @Query("DELETE FROM githubuser")
+    fun clearGithubCache()
+
+    @Query("DELETE FROM dailymotionuser")
+    fun clearDailymotionCache()
+
 }

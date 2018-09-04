@@ -28,35 +28,53 @@ class UserRepository @Inject constructor(userDao: UserDao, gitHubUserApi: GitHub
         return future.get()
     }
 
-    fun getDailymotionUsers(): Observable<List<DailymotionUser>> {
-        return Observable.fromCallable { userDao.getAllFromDailymotion }
-                .concatMap { dbUserList ->
-                    if (dbUserList.isEmpty())
-                        dailymotionUserApi.getUsers().concatMap { apiUserList ->
-                            userDao.insertAll(*apiUserList.list.toTypedArray())
-                            Observable.just(apiUserList.list)
-                        }
-                    else
-                        Observable.just(dbUserList)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    fun getDailymotionUsers(fresh: Boolean): Observable<List<DailymotionUser>> {
+        if (fresh) {
+            return dailymotionUserApi.getUsers().concatMap { apiUserList ->
+                userDao.clearDailymotionCache()
+                userDao.insertAll(*apiUserList.list.toTypedArray())
+                Observable.just(apiUserList.list)
+            }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        } else {
+            return Observable.fromCallable { userDao.getAllFromDailymotion }
+                    .concatMap { dbUserList ->
+                        if (dbUserList.isEmpty())
+                            dailymotionUserApi.getUsers().concatMap { apiUserList ->
+                                userDao.insertAll(*apiUserList.list.toTypedArray())
+                                Observable.just(apiUserList.list)
+                            }
+                        else
+                            Observable.just(dbUserList)
+                    }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
     }
 
-    fun getGitHubUsers(): Observable<List<GitHubUser>> {
-        return Observable.fromCallable { userDao.getAllFromGithub }
-                .concatMap { dbUserList ->
-                    if (dbUserList.isEmpty())
-                        gitHubUserApi.getUsers().concatMap { apiUserList ->
-                            userDao.insertAll(*apiUserList.toTypedArray())
-                            Observable.just(apiUserList)
-                        }
-                    else
-                        Observable.just(dbUserList)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    fun getGitHubUsers(fresh: Boolean): Observable<List<GitHubUser>> {
+        if (fresh) {
+            return gitHubUserApi.getUsers().concatMap { apiUserList ->
+                userDao.clearGithubCache()
+                userDao.insertAll(*apiUserList.toTypedArray())
+                Observable.just(apiUserList)
+            }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        } else {
+            return Observable.fromCallable { userDao.getAllFromGithub }
+                    .concatMap { dbUserList ->
+                        if (dbUserList.isEmpty())
+                            gitHubUserApi.getUsers().concatMap { apiUserList ->
+                                userDao.insertAll(*apiUserList.toTypedArray())
+                                Observable.just(apiUserList)
+                            }
+                        else
+                            Observable.just(dbUserList)
+                    }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
     }
-
-
 }
